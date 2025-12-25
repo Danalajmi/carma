@@ -1,8 +1,14 @@
 import { useState } from "react"
-import Multiselect from "multiselect-react-dropdown"
+import Select from "react-select/base"
 import carBrands from "../assets/carBrands.json"
-import '../assets/style/New.css'
-const New = ({ role }) => {
+import services from "../assets/services.json"
+
+import "../assets/style/New.css"
+import { RegisterUser } from "../services/auth"
+import { createGarage } from "../services/garage"
+import { createCar} from "../services/car.js"
+
+const New = ({ role, userInfo, setUSer, userInit }) => {
   const initCar = {
     title: "",
     carBrand: "",
@@ -20,6 +26,10 @@ const New = ({ role }) => {
   const [carInfo, setCar] = useState(initCar)
   const [garageInfo, setGarage] = useState(initGarage)
 
+
+  const [selectedCarBrands, setSelectedCarBrands] = useState([])
+  const [selectedServices, setSelectedServices] = useState([])
+
   const handleChange = (event) => {
     if (role === "Car Owner") {
       setCar({ ...carInfo, [event.target.name]: event.target.value })
@@ -28,8 +38,24 @@ const New = ({ role }) => {
     }
   }
 
-  const handleSubmit = async (event) => {}
-  const carBrand = () => {
+  const handleSubmit = async () => {
+    e.preventDefault()
+    
+    await RegisterUser({ userInfo })
+    setUSer(userInit)
+    if(role == 'Garage Owner'){
+      await createGarage({ garageInfo })
+    setGarage(initGarage)
+    }else if(role === 'Car Owner'){
+      await createCar({carInfo})
+      setCar(initCar)
+    }
+
+    Navigate("/Login")
+  }
+
+
+  const setCarBrand = () => {
     setGarage({
       ...garageInfo,
       [garageInfo.carBrands]: garageInfo.carBrands.push(),
@@ -38,7 +64,7 @@ const New = ({ role }) => {
   if (role === "Car Owner") {
     return (
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="title">Title</label>
           <input
             type="text"
@@ -56,7 +82,7 @@ const New = ({ role }) => {
             value={carInfo.carBrand}
             onChange={handleChange}
           />
-          
+
           <label htmlFor="model">Your Car's model</label>
           <input
             type="text"
@@ -75,7 +101,6 @@ const New = ({ role }) => {
             onChange={handleChange}
           />
 
-
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -91,14 +116,28 @@ const New = ({ role }) => {
           <input type="tel" name="phone" placeholder="Phone" />
 
           <textarea name="description" placeholder="Description" />
-          <Multiselect
+          <Select
             options={carBrands}
-            displayValue="name"
-            closeOnSelect={false}
+
+            closeMenuOnSelect={false}
+            isMulti
+            isSearchable= {true}
             className="multiselect"
-            onSelect={carBrand}
+            onChange={setCarBrand}
+            placeholder="Supported Car brands"
           />
-        <button type="submit">Submit</button>
+          <br />
+          <Select
+            options={services}
+
+            closeMenuOnSelect={false}
+            isMulti
+            isSearchable= {true}
+            className="multiselect"
+            onChange={setCarBrand}
+            placeholder="Offered Services"
+          />
+          <button type="submit">Submit</button>
         </form>
       </div>
     )

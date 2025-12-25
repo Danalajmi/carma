@@ -42,6 +42,7 @@ const Login = () => {
           onChange={handleChange}
           required
         />
+        <button type="submit">Submit</button>
       </form>
     </div>
   )

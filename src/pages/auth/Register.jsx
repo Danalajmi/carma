@@ -1,27 +1,38 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import New from "../../components/New"
-import '../../assets/style/Registery.css'
+import { RegisterUser } from "../../services/auth"
+import '../../assets/style/Registry.css'
+
+
 const Register = () => {
+  const Navigate = useNavigate()
   const initValues = {
     name: "",
     email: "",
     password: "",
-    phoneNumber: undefined,
-    role: "Garage Owner",
+    phoneNumber: "",
+    role: null,
   }
 
   const [userValues, setValues] = useState(initValues)
 
   const handleChange = (event) => {
-    setValues({ ...setValues, [event.target.name]: event.target.value })
+    setValues({ ...userValues, [event.target.name]: event.target.value })
   }
   const setRole = (SelectedRole) => {
     setValues({...userValues, role: SelectedRole})
   }
+
+
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      await RegisterUser(userValues)
+      Navigate("/auth/login")
+    }
   return (
     <div className="Registry">
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -71,10 +82,10 @@ const Register = () => {
             Garage Owner
           </button>
 
-          <button type="submit">Submit</button>
+      <button type="submit" onClick={handleSubmit}>Submit</button>
       </form>
 
-        {userValues.role ? <New role={userValues.role} /> : null}
+        {userValues.role ? <New role={userValues.role} userInfo={userValues} setUSer={setValues} userInit={initValues}/> : null}
     </div>
   )
 }
