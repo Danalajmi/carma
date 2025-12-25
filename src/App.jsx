@@ -6,11 +6,14 @@ import Login from './pages/auth/Login';
 import Home from './pages/Home';
 import New from './components/New';
 import UserContext from './context/userContext';
+import Nav from "./components/Nav"
+
 
 const App = () => {
 const {user, saveUser} = useContext(UserContext)
   return (
     <>
+    <Nav />
     <h1>Welcome to Carma</h1>
     <main>
 
