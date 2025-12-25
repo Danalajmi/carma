@@ -10,3 +10,10 @@ body {
   text-align: center;
 }
 
+nav {
+  background-color: #212121;
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  height: 3em;
+}
