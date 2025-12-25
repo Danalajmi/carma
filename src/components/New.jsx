@@ -1,16 +1,16 @@
 import { use, useState } from "react"
-import Select from "react-select/base"
+import Select from "react-select"
 import carBrands from "../assets/carBrands.json"
 import services from "../assets/services.json"
 
 import "../assets/style/New.css"
 import { RegisterUser } from "../services/auth"
 import { createGarage } from "../services/garage"
-import { createCar} from "../services/car.js"
+import { createCar } from "../services/car.js"
 
 import { useNavigate } from "react-router-dom"
 
-const New = ({ role, userInfo, setUSer, userInit }) => {
+const New = ({ role }) => {
   const Navigate = useNavigate()
   const initCar = {
     title: "",
@@ -30,38 +30,32 @@ const New = ({ role, userInfo, setUSer, userInit }) => {
   const [garageInfo, setGarage] = useState(initGarage)
 
 
-  const [selectedCarBrands, setSelectedCarBrands] = useState([])
-  const [selectedServices, setSelectedServices] = useState([])
 
   const handleChange = (event) => {
     if (role === "Car Owner") {
       setCar({ ...carInfo, [event.target.name]: event.target.value })
-    } else {
+    } else if(role === "Garage Owner") {
       setGarage({ ...garageInfo, [event.target.name]: event.target.value })
+      console.log(garageInfo)
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    await RegisterUser(userInfo)
-    setUSer(userInit)
-    if(role == 'Garage Owner'){
+    if (role == "Garage Owner") {
       await createGarage(garageInfo)
       setGarage(initGarage)
-    }else if(role === 'Car Owner'){
-      await createCar({carInfo})
+    } else if (role === "Car Owner") {
+      await createCar({ carInfo })
       setCar(initCar)
     }
-    Navigate("/auth/login")
-
+    Navigate("/home")
   }
 
-
-  const setCarBrand = () => {
+  const setCarBrand = (selectedBrands) => {
     setGarage({
       ...garageInfo,
-      [garageInfo.carBrands]: garageInfo.carBrands.push(),
+      [garageInfo.carBrands]: selectedBrands,
     })
   }
   if (role === "Car Owner") {
@@ -121,10 +115,9 @@ const New = ({ role, userInfo, setUSer, userInit }) => {
           <textarea name="description" placeholder="Description" />
           <Select
             options={carBrands}
-
             closeMenuOnSelect={false}
             isMulti
-            isSearchable= {true}
+            isSearchable={true}
             className="multiselect"
             onChange={setCarBrand}
             placeholder="Supported Car brands"
@@ -132,14 +125,14 @@ const New = ({ role, userInfo, setUSer, userInit }) => {
           <br />
           <Select
             options={services}
-
             closeMenuOnSelect={false}
             isMulti
-            isSearchable= {true}
+            isSearchable={true}
             className="multiselect"
             onChange={setCarBrand}
             placeholder="Offered Services"
           />
+
           <button type="submit">Submit</button>
         </form>
       </div>

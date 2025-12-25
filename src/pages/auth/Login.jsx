@@ -2,7 +2,7 @@ import { useState } from "react"
 import { LogInUser } from "../../services/auth"
 import { useNavigate } from "react-router-dom"
 
-const Login = () => {
+const Login = ({setUser}) => {
   const Navigate = useNavigate()
   const initValues = {
     email: "",
@@ -18,7 +18,9 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     await LogInUser(loginInfo)
-    Navigate('/Home')
+    setUser(loginInfo)
+    setInfo(initValues)
+    Navigate('/new')
   }
   return (
     <div>
