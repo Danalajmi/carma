@@ -1,0 +1,10 @@
+[
+  { "value": 1, "label": "bodywork" },
+  { "value": 2, "label": "mechanical" },
+  { "value": 3, "label": "electrical" },
+  { "value": 4, "label": "hvac" },
+  { "value": 5, "label": "tyres" },
+  { "value": 6, "label": "maintenance" },
+  { "value": 7, "label": "performance" },
+  { "value": 8, "label": "detailing" }
+]
