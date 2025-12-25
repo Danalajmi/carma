@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import Select from "react-select/base"
 import carBrands from "../assets/carBrands.json"
 import services from "../assets/services.json"
@@ -8,7 +8,10 @@ import { RegisterUser } from "../services/auth"
 import { createGarage } from "../services/garage"
 import { createCar} from "../services/car.js"
 
+import { useNavigate } from "react-router-dom"
+
 const New = ({ role, userInfo, setUSer, userInit }) => {
+  const Navigate = useNavigate()
   const initCar = {
     title: "",
     carBrand: "",
@@ -38,20 +41,20 @@ const New = ({ role, userInfo, setUSer, userInit }) => {
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    await RegisterUser({ userInfo })
+
+    await RegisterUser(userInfo)
     setUSer(userInit)
     if(role == 'Garage Owner'){
-      await createGarage({ garageInfo })
-    setGarage(initGarage)
+      await createGarage(garageInfo)
+      setGarage(initGarage)
     }else if(role === 'Car Owner'){
       await createCar({carInfo})
       setCar(initCar)
     }
+    Navigate("/auth/login")
 
-    Navigate("/Login")
   }
 
 

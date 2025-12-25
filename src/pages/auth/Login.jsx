@@ -3,7 +3,7 @@ import { LogInUser } from "../../services/auth"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
-  const Navigate = useNavigate
+  const Navigate = useNavigate()
   const initValues = {
     email: "",
     password: "",
@@ -18,7 +18,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     await LogInUser(loginInfo)
-    Navigate('/home')
+    Navigate('/Home')
   }
   return (
     <div>
@@ -35,7 +35,7 @@ const Login = () => {
 
         <label htmlFor="password">Password</label>
         <input
-          type="text"
+          type="password"
           name="password"
           value={loginInfo.password}
           placeholder="Enter Your Password"
