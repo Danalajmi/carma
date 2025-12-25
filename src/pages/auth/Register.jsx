@@ -85,7 +85,7 @@ const Register = () => {
       <button type="submit" onClick={handleSubmit}>Submit</button>
       </form>
 
-        {userValues.role ? <New role={userValues.role} userInfo={userValues} setUSer={setValues} userInit={initValues}/> : null}
+
     </div>
   )
 }
