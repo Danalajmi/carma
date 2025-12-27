@@ -1,5 +1,7 @@
 import { useContext } from "react"
 import userContext from "../context/userContext"
+import MainDetailsCard from "../components/MainDetailsCard"
+import InterestedCard from "../components/InterestedCard"
 
 const Dashboard = () => {
   const { user } = useContext(userContext)
@@ -26,10 +28,12 @@ const Dashboard = () => {
 
         <div className="left-panel">
           <h2>{leftPanel}</h2>
+          <MainDetailsCard />
         </div>
 
         <div className="right-panel">
           <h2>{rightPanel}</h2>
+          <InterestedCard />
         </div>
 
       </div>
