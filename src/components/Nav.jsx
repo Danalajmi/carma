@@ -4,7 +4,6 @@ import userContext from "../context/userContext"
 
 const Nav = () => {
   const { user } = useContext(userContext)
-  console.log(user)
   return (
     <header>
       <nav>
