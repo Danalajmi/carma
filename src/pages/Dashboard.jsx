@@ -8,8 +8,8 @@ const Dashboard = () => {
   console.log(user)
 
   let title = ""
-  if (user.role === "Garage Owner") { title = "Garage Dashboard"}
-  else if (user.role === "Car Owner") { title = "My Cars Dashboard"}
+  if (user.role === "Garage Owner") { title = user.name }
+  else if (user.role === "Car Owner") { title = user.name }
   else {title = "Who let you in here?"}
 
   let leftPanel = ""
@@ -22,16 +22,18 @@ const Dashboard = () => {
 
   return(
     <div className="dashboard">
-      <h1>{title}</h1>
+      <h1>{title} Dashboard</h1>
 
       <div className="dashboard-panels">
 
         <div className="left-panel">
+          <p>___________________</p>
           <h2>{leftPanel}</h2>
           <MainDetailsCard />
         </div>
 
         <div className="right-panel">
+          <p>___________________</p>
           <h2>{rightPanel}</h2>
           <InterestedCard />
         </div>

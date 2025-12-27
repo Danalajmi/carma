@@ -1,7 +1,9 @@
 const InterestedCard = () => {
+
   return (
     <div className="interested-card">
-      <h3>More test test test</h3>
+      <h3>Car Brand</h3>
+      <p>Description</p>
     </div>
   )
 }
