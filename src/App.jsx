@@ -13,7 +13,6 @@ const App = () => {
 const {user, saveUser} = useContext(UserContext)
   return (
     <>
-    <Nav />
     <h1>Welcome to Carma</h1>
     <main>
 

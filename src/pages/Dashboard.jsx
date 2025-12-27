@@ -1,9 +1,9 @@
 import { useContext } from "react"
 import userContext from "../context/userContext"
 
-
 const Dashboard = () => {
   const { user } = useContext(userContext)
+  console.log(user)
 
   let title = ""
   if (user.role === "Garage Owner") { title = "Garage Dashboard"}

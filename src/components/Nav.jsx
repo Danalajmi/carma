@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useContext } from "react"
+import userContext from "../context/userContext"
 
 const Nav = () => {
-  const [user, setUser] = useState(null)
-
+  const { user } = useContext(userContext)
+  console.log(user)
   return (
     <header>
       <nav>
-        <Link to="/"> Home </Link>
+        <Link to="/home"> Home </Link>
         {user ? (
           <>
-            <Link to="/dash"> My Dashboard </Link>
+            <Link to="/dashboard"> My Dashboard </Link>
             <Link to="/"> Log Out </Link>
           </>
         ) : (
