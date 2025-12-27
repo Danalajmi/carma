@@ -16,9 +16,7 @@ const Nav = () => {
         {user ? (
           <>
             <Link to="/dash"> My Dashboard </Link>
-
             <Link to="/new"> Add a new garage </Link>
-            <Link to="/dashboard"> My Dashboard </Link>
             <Link to="/home" onClick={handleLogOut}>
               {" "}
               Log Out{" "}

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Routes, Route } from "react-router-dom"
 import "./App.css"
 import Nav from "./components/Nav"
@@ -11,7 +11,9 @@ import UserContext from "./context/userContext"
 import Dashboard from "./pages/Dashboard"
 
 const App = () => {
-  const { user, saveUser } = useContext(UserContext)
+  const { user, saveUser, checkToken } = useContext(UserContext)
+
+  
 
   return (
     <>

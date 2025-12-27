@@ -13,7 +13,7 @@ const New = ({ user }) => {
   const Navigate = useNavigate()
   const initCar = {
     title: "",
-    carBrand: "",
+    // carBrand: "",
     year: undefined,
     model: "",
   }
@@ -32,7 +32,6 @@ const New = ({ user }) => {
     if (user.role === "Car Owner") {
       setCar({ ...carInfo, [event.target.name]: event.target.value })
     } else if (user.role === "Garage Owner") {
-      console.log(garageInfo)
       setGarage({ ...garageInfo, [event.target.name]: event.target.value })
     }
   }
@@ -47,17 +46,21 @@ const New = ({ user }) => {
       await createCar({ carInfo })
       setCar(initCar)
     }
-    Navigate("/home")
+    Navigate("/dash")
   }
 
   const setCarBrand = (selectedBrands) => {
-    let brandString = selectedBrands.map((brand) => brand.label)
-    setGarage({ ...garageInfo, carBrands: brandString })
-    console.log(garageInfo.carBrands)
+    if(user.role === "Garage Owner"){
+      let brandString = selectedBrands.map((brand) => brand.label)
+      setGarage({ ...garageInfo, carBrands: brandString })
+    }else if(user.role === "Car Owner"){
+      setCar({...carInfo, carBrand: [selectedBrands.label]})
+    }
   }
   const setServices = (selectedServices) => {
     let serviceString = selectedServices.map((service) => service.label)
     setGarage({ ...garageInfo, services: serviceString })
+    console.log(garageInfo.services)
   }
 
   if (user.role === "Car Owner") {
@@ -72,25 +75,18 @@ const New = ({ user }) => {
             value={carInfo.title}
             onChange={handleChange}
           />
-
-          <label htmlFor="carBrand">Your Car's Brand</label>
-          <input
-            type="text"
-            name="carBrand"
-            placeholder="Car Brand"
-            value={carInfo.carBrand}
-            onChange={handleChange}
-          />
+          <br />
 
           <Select
             options={carBrands}
-            closeMenuOnSelect={false}
-            isMulti
+            closeMenuOnSelect={true}
+            isMulti={false}
             isSearchable={true}
             className="multiselect"
             onChange={setCarBrand}
             placeholder="Supported Car brands"
           />
+          <br />
 
           <label htmlFor="model">Your Car's model</label>
           <input
@@ -100,7 +96,7 @@ const New = ({ user }) => {
             value={carInfo.model}
             onChange={handleChange}
           />
-
+<br />
           <label htmlFor="year">Year of make</label>
           <input
             type="number"

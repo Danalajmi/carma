@@ -19,3 +19,14 @@ export const LogInUser = async (data) => {
     throw error
   }
 }
+
+
+export const CheckSession = async () => {
+  try {
+    const res = await Client.get("/auth/session")
+    // Checks if there is a token and if it is valid
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
