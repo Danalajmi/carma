@@ -1,20 +1,31 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
+import { CheckSession } from '../services/auth'
 
 
-const userContext = createContext(null)
+const UserContext = createContext(null)
 
-export default userContext
+export default UserContext
 
 
 export const UserProvider = ({children}) => {
-  const initUser = {
-    email: ""
+
+  useEffect(() => {
+  const token = localStorage.getItem('token')
+  const checkToken = async () => {
+    const userData = await CheckSession()
+    setUser(userData)
+}
+  if(token){
+    checkToken()
   }
+  })
+  const initUser = null
   const [user, setUser] = useState(initUser)
+
   const saveUser = (data) => {
     setUser(data)
   }
   return (
-    <userContext.Provider value={{user, saveUser}}>{children}</userContext.Provider>
+    <UserContext.Provider value={{user, saveUser}}>{children}</UserContext.Provider>
   )
 }

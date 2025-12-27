@@ -2,7 +2,7 @@ import { useState } from "react"
 import { LogInUser } from "../../services/auth"
 import { useNavigate } from "react-router-dom"
 
-const Login = ({setUser}) => {
+const Login = ({ setUser }) => {
   const Navigate = useNavigate()
   const initValues = {
     email: "",
@@ -17,10 +17,10 @@ const Login = ({setUser}) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    await LogInUser(loginInfo)
-    setUser(loginInfo)
+    const response = await LogInUser(loginInfo)
+    setUser(response)
     setInfo(initValues)
-    Navigate('/new')
+    Navigate("/new")
   }
   return (
     <div>
