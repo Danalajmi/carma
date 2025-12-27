@@ -1,16 +1,15 @@
-import { use, useState } from "react"
+import { useState } from "react"
 import Select from "react-select"
 import carBrands from "../assets/carBrands.json"
 import services from "../assets/services.json"
 
 import "../assets/style/New.css"
-import { RegisterUser } from "../services/auth"
 import { createGarage } from "../services/garage"
 import { createCar } from "../services/car.js"
 
 import { useNavigate } from "react-router-dom"
 
-const New = ({ role }) => {
+const New = ({ user }) => {
   const Navigate = useNavigate()
   const initCar = {
     title: "",
@@ -29,23 +28,22 @@ const New = ({ role }) => {
   const [carInfo, setCar] = useState(initCar)
   const [garageInfo, setGarage] = useState(initGarage)
 
-
-
   const handleChange = (event) => {
-    if (role === "Car Owner") {
+    if (user.role === "Car Owner") {
       setCar({ ...carInfo, [event.target.name]: event.target.value })
-    } else if(role === "Garage Owner") {
-      setGarage({ ...garageInfo, [event.target.name]: event.target.value })
+    } else if (user.role === "Garage Owner") {
       console.log(garageInfo)
+      setGarage({ ...garageInfo, [event.target.name]: event.target.value })
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (role == "Garage Owner") {
+    if (user.role == "Garage Owner") {
+      console.log(garageInfo)
       await createGarage(garageInfo)
       setGarage(initGarage)
-    } else if (role === "Car Owner") {
+    } else if (user.role === "Car Owner") {
       await createCar({ carInfo })
       setCar(initCar)
     }
@@ -53,12 +51,16 @@ const New = ({ role }) => {
   }
 
   const setCarBrand = (selectedBrands) => {
-    setGarage({
-      ...garageInfo,
-      [garageInfo.carBrands]: selectedBrands,
-    })
+    let brandString = selectedBrands.map((brand) => brand.label)
+    setGarage({ ...garageInfo, carBrands: brandString })
+    console.log(garageInfo.carBrands)
   }
-  if (role === "Car Owner") {
+  const setServices = (selectedServices) => {
+    let serviceString = selectedServices.map((service) => service.label)
+    setGarage({ ...garageInfo, services: serviceString })
+  }
+
+  if (user.role === "Car Owner") {
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -78,6 +80,16 @@ const New = ({ role }) => {
             placeholder="Car Brand"
             value={carInfo.carBrand}
             onChange={handleChange}
+          />
+
+          <Select
+            options={carBrands}
+            closeMenuOnSelect={false}
+            isMulti
+            isSearchable={true}
+            className="multiselect"
+            onChange={setCarBrand}
+            placeholder="Supported Car brands"
           />
 
           <label htmlFor="model">Your Car's model</label>
@@ -105,14 +117,38 @@ const New = ({ role }) => {
   } else {
     return (
       <div>
-        <form>
-          <input type="text" name="name" placeholder="Garage Name" />
+        <form onSubmit={handleSubmit}>
+          {/* <label htmlFor="name">Garage name</label> */}
+          <input
+            type="text"
+            name="name"
+            onChange={handleChange}
+            value={garageInfo.name}
+            placeholder="Garage Name"
+          />
 
-          <input type="text" name="location" placeholder="Location" />
+          <input
+            type="text"
+            name="location"
+            placeholder="Location"
+            onChange={handleChange}
+            value={garageInfo.location}
+          />
 
-          <input type="tel" name="phone" placeholder="Phone" />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone"
+            onChange={handleChange}
+            value={garageInfo.phone}
+          />
 
-          <textarea name="description" placeholder="Description" />
+          <textarea
+            name="description"
+            placeholder="Description"
+            onChange={handleChange}
+            value={garageInfo.description}
+          />
           <Select
             options={carBrands}
             closeMenuOnSelect={false}
@@ -129,7 +165,7 @@ const New = ({ role }) => {
             isMulti
             isSearchable={true}
             className="multiselect"
-            onChange={setCarBrand}
+            onChange={setServices}
             placeholder="Offered Services"
           />
 
