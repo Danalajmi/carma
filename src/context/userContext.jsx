@@ -7,9 +7,8 @@ export default UserContext
 
 
 export const UserProvider = ({children}) => {
-  
-
-  const [user, setUser] = useState('')
+  const initUser = null
+  const [user, setUser] = useState(initUser)
   const saveUser = (data) => {
     setUser(data)
   }

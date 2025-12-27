@@ -17,8 +17,8 @@ const Login = ({ setUser }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const userInfo = await LogInUser(loginInfo)
-    setUser(userInfo)
+    const response = await LogInUser(loginInfo)
+    setUser(response)
     setInfo(initValues)
     Navigate("/new")
   }

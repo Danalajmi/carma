@@ -9,10 +9,13 @@ const Nav = () => {
     saveUser(null)
     localStorage.clear()
   }
+
+const Nav = () => {
+  const { user } = useContext(userContext)
   return (
     <header>
       <nav>
-        <Link to="/"> Home </Link>
+        <Link to="/home"> Home </Link>
         {user ? (
           <>
             <Link to="/dash"> My Dashboard </Link>
@@ -23,6 +26,8 @@ const Nav = () => {
               {" "}
               Log Out{" "}
             </Link>
+            <Link to="/dashboard"> My Dashboard </Link>
+            <Link to="/"> Log Out </Link>
           </>
         ) : (
           <Link to="/auth/login"> Login </Link>
@@ -31,5 +36,5 @@ const Nav = () => {
     </header>
   )
 }
-
+}
 export default Nav
