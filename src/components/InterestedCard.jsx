@@ -1,9 +1,15 @@
-const InterestedCard = () => {
+const InterestedCard = ({ items, role }) => {
 
   return (
-    <div className="interested-card">
-      <h3>Car Brand</h3>
-      <p>Description</p>
+    <div className="right-panel">
+      <h4>Total Requests: {items.length}</h4>
+      {items.map((item) => (
+        <div key={item.id} className="right-card">
+          <h3>{item.carBrand}</h3>
+          <p>{item.status}</p>
+          {role === "Car Owner" ? (<button>View Interested Garages</button>) : (<button>View Request</button>)}
+        </div>
+      ))}
     </div>
   )
 }

@@ -1,43 +1,40 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import userContext from "../context/userContext"
 import MainDetailsCard from "../components/MainDetailsCard"
 import InterestedCard from "../components/InterestedCard"
+import services from "../assets/services.json"
 
 const Dashboard = () => {
   const { user } = useContext(userContext)
   console.log(user)
 
-  let title = ""
-  if (user.role === "Garage Owner") { title = user.name }
-  else if (user.role === "Car Owner") { title = user.name }
-  else {title = "Who let you in here?"}
+  const [submittedRequests, setSubmittedRequests] = useState([])
+  const [interestedRequests, setInterestedRequests] = useState([])
 
-  let leftPanel = ""
-  if (user.role === "Garage Owner") { leftPanel = "Service Requests"}
-  else if (user.role === "Car Owner") { leftPanel = "My Cars"}
 
-  let rightPanel = ""
-  if (user.role === "Garage Owner") { rightPanel = "My Interests"}
-  else if (user.role === "Car Owner") { rightPanel = "Sent Requests"}
+  let title = user.name
+  let leftPanel = user.role === "Garage Owner" ? "Service Requests" : "My Cars"
+  let rightPanel = user.role === "Garage Owner" ? "My Interests" : "Sent Requests"
 
-  return(
+  return (
     <div className="dashboard">
       <h1>{title} Dashboard</h1>
 
       <div className="dashboard-panels">
-
         <div className="left-panel">
-          <p>___________________</p>
           <h2>{leftPanel}</h2>
-          <MainDetailsCard />
+          <MainDetailsCard
+            items={submittedRequests}
+            role={user.role}
+            onSubmitRequest={(newRequest) =>
+              setSubmittedRequests((requests) => [...requests, newRequest])
+            }
+          />
         </div>
-
         <div className="right-panel">
-          <p>___________________</p>
           <h2>{rightPanel}</h2>
-          <InterestedCard />
+            <InterestedCard items={submittedRequests} role={user.role}/>
         </div>
-
       </div>
     </div>
   )

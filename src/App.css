@@ -13,11 +13,46 @@ body {
 nav {
   background-color: #212121;
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
   align-items: center;
   height: 3em;
 }
 
-/* .dashboard-panels {
+.dashboard-panels {
   display: flex;
-} */
+}
+
+.left-panel {
+  min-width: 10cm;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: #89223d;
+  justify-content: space-around;
+}
+
+.left-card {
+  background-color: #cc84a6;
+  border-radius: 8px; /* rounded corners */
+  padding: 10px; /* space inside the card */
+  margin-bottom: 10px; /* space between cards */
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* optional shadow */
+}
+
+.right-panel {
+  background-color: #00645d;
+  border-radius: 8px; /* rounded corners */
+  padding: px; /* space inside the card */
+  margin: 10px;
+}
+
+.right-card {
+  background-color: #228984;
+  border-radius: 8px; /* rounded corners */
+  padding: 10px; /* space inside the card */
+  margin-bottom: 10px; /* space between cards */
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* optional shadow */
+}
+
+button {
+  font-size: small;
+}
