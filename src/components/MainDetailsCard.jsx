@@ -63,7 +63,10 @@ const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
                   />
                   <br></br>
 
-                  <button onClick={() => handleAddRequest(item)}>Submit Request</button>
+                  <button
+                    onClick={() => handleAddRequest(item)}
+                    disabled={services.length === 0}
+                      >Submit Request</button>
                 </div>
               )}
             </>
