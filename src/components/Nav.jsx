@@ -15,7 +15,7 @@ const Nav = () => {
         {user ? (
           <>
             <Link to="/dashboard"> My Dashboard </Link>
-            <button onClick={handleLogout}> Log Out </button>
+            <Link to="/auth/login" onClick={handleLogout}> Log Out </Link>
           </>
         ) : (
           <Link to="/auth/login"> Login </Link>

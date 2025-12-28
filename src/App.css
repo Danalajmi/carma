@@ -39,6 +39,7 @@ nav {
 }
 
 .right-panel {
+  min-width: 5cm;
   background-color: #00645d;
   border-radius: 8px; /* rounded corners */
   padding: px; /* space inside the card */
@@ -55,4 +56,8 @@ nav {
 
 button {
   font-size: small;
+}
+
+.dropdown {
+  color: black
 }

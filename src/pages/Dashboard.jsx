@@ -8,8 +8,15 @@ const Dashboard = () => {
   const { user } = useContext(userContext)
   console.log(user)
 
+  // my sample cars
+  const [cars, setCars] = useState([
+    { id: 1, brand: "BMW", model: "2021" },
+    { id: 2, brand: "Audi", model: "2020" }
+  ]);
+
   const [submittedRequests, setSubmittedRequests] = useState([])
   const [interestedRequests, setInterestedRequests] = useState([])
+
 
   const handleInterest = (newInterest) => {
     setInterestedRequests((interests) => [...interests, newInterest])
@@ -27,7 +34,7 @@ const Dashboard = () => {
         <div className="left-panel">
           <h2>{leftPanel}</h2>
           <MainDetailsCard
-            items={submittedRequests}
+            items={user.role === "Car Owner" ? cars : submittedRequests}
             role={user.role}
             onSubmitRequest={
               user.role === "Car Owner" ? (newRequest) =>
