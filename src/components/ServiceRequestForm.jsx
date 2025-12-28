@@ -40,8 +40,10 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car }) => {
 
     let response = await sendRequest(car, form)
 
-    setServiceRequest([...ServiceRequest, response.data])
+    // setServiceRequest([...ServiceRequest, response.data])
+
     setFormState(initialState)
+    
   }
 
   return (
