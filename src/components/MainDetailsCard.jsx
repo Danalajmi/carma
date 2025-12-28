@@ -34,7 +34,8 @@ const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
       {items.map((item) => (
         <div key={item.id} className="left-card">
           <h3>{item.brand} | {item.model}</h3>
-          <p>{item.description}</p>
+          <p>Request for: <strong>{item.service}</strong></p>
+          <p>Description: {item.description}</p>
 
           {role === "Car Owner" ? (
             <>
@@ -65,7 +66,7 @@ const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
 
                   <button
                     onClick={() => handleAddRequest(item)}
-                    disabled={services.length === 0}
+                    disabled={services.length === 0} //disables submit request button if no service is selected
                       >Submit Request</button>
                 </div>
               )}

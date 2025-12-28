@@ -18,8 +18,8 @@ const Dashboard = () => {
 
   // my sample submitted requests
   const [submittedRequests, setSubmittedRequests] = useState([
-    { id: 1, brand: "BMW", model: "2021" },
-    { id: 2, brand: "Audi", model: "2020" }
+    { id: 1, brand: "BMW", model: "2021", service: "tyres", description:"Tyres need camber alignment" },
+    { id: 2, brand: "Audi", model: "2020", service: "hvac, paint", description:"Need the ac to work" }
   ])
   const [interestedRequests, setInterestedRequests] = useState([])
 
