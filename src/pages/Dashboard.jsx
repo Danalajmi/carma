@@ -3,6 +3,7 @@ import userContext from "../context/userContext"
 import MainDetailsCard from "../components/MainDetailsCard"
 import InterestedCard from "../components/InterestedCard"
 import {  useNavigate } from "react-router-dom"
+import ServiceRequestForm from "../components/ServiceRequestForm"
 
 const Dashboard = () => {
   const Navigate = useNavigate()
@@ -30,6 +31,7 @@ const Dashboard = () => {
   return user ? (
     <div className="dashboard">
       <h1>{title} Dashboard</h1>
+    
 
       <div className="dashboard-panels">
 
@@ -37,6 +39,7 @@ const Dashboard = () => {
           <p>___________________</p>
           <h2>{leftPanel}</h2>
           <MainDetailsCard />
+
         </div>
 
         <div className="right-panel">

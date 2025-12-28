@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 import Select from "react-select"
 import carBrands from "../assets/carBrands.json"
 import services from "../assets/services.json"
@@ -8,13 +8,16 @@ import { createGarage } from "../services/garage"
 import { createCar } from "../services/car.js"
 
 import { useNavigate } from "react-router-dom"
+import userContext from "../context/userContext"
 
-const New = ({ user }) => {
+const New = () => {
   const Navigate = useNavigate()
+  const { user } = useContext(userContext)
+
   const initCar = {
     title: "",
     // carBrand: "",
-    year: undefined,
+    year: '',
     model: "",
   }
   const initGarage = {
@@ -29,10 +32,9 @@ const New = ({ user }) => {
   const [garageInfo, setGarage] = useState(initGarage)
 
   const handleChange = (event) => {
-    if (user.role === "Car Owner") {
+    if (user?.role === "Car Owner") {
       setCar({ ...carInfo, [event.target.name]: event.target.value })
-
-    } else if (user.role === "Garage Owner") {
+    } else if (user?.role === "Garage Owner") {
       setGarage({ ...garageInfo, [event.target.name]: event.target.value })
     }
   }
@@ -43,20 +45,21 @@ const New = ({ user }) => {
       await createGarage(garageInfo)
       setGarage(initGarage)
     } else if (user.role === "Car Owner") {
-      console.log(carInfo.carBrand)
-      await createCar({ carInfo })
+      
+
+      await createCar(carInfo)
       setCar(initCar)
     }
     Navigate("/dash")
   }
 
   const setCarBrand = (selectedBrands) => {
-    if(user.role === "Garage Owner"){
+    if (user?.role === "Garage Owner") {
       let brandString = selectedBrands.map((brand) => brand.label)
       setGarage({ ...garageInfo, carBrands: brandString })
-    }else if(user.role === "Car Owner"){
-      
-      setCar({...carInfo, carBrand: selectedBrands.label})
+    } else if (user?.role === "Car Owner") {
+
+      setCar({ ...carInfo, carBrand: selectedBrands.label })
     }
   }
   const setServices = (selectedServices) => {
@@ -64,8 +67,7 @@ const New = ({ user }) => {
     setGarage({ ...garageInfo, services: serviceString })
     console.log(garageInfo.services)
   }
-
-  if (user.role === "Car Owner") {
+  if (user?.role === "Car Owner") {
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -98,7 +100,7 @@ const New = ({ user }) => {
             value={carInfo.model}
             onChange={handleChange}
           />
-<br />
+          <br />
           <label htmlFor="year">Year of make</label>
           <input
             type="number"
@@ -112,7 +114,7 @@ const New = ({ user }) => {
         </form>
       </div>
     )
-  } else {
+  } else if(user?.role === "Garage Owner"){
     return (
       <div>
         <form onSubmit={handleSubmit}>
