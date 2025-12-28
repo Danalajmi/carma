@@ -9,7 +9,7 @@ import Nav from './components/Nav.jsx'
 createRoot(document.getElementById("root")).render(
   <UserProvider>
   <BrowserRouter>
-    <Nav />
+    
     <App />
   </BrowserRouter>
   </UserProvider>,

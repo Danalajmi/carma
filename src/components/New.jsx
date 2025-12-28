@@ -31,6 +31,7 @@ const New = ({ user }) => {
   const handleChange = (event) => {
     if (user.role === "Car Owner") {
       setCar({ ...carInfo, [event.target.name]: event.target.value })
+
     } else if (user.role === "Garage Owner") {
       setGarage({ ...garageInfo, [event.target.name]: event.target.value })
     }
@@ -39,10 +40,10 @@ const New = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (user.role == "Garage Owner") {
-      console.log(garageInfo)
       await createGarage(garageInfo)
       setGarage(initGarage)
     } else if (user.role === "Car Owner") {
+      console.log(carInfo.carBrand)
       await createCar({ carInfo })
       setCar(initCar)
     }
@@ -54,7 +55,8 @@ const New = ({ user }) => {
       let brandString = selectedBrands.map((brand) => brand.label)
       setGarage({ ...garageInfo, carBrands: brandString })
     }else if(user.role === "Car Owner"){
-      setCar({...carInfo, carBrand: [selectedBrands.label]})
+      
+      setCar({...carInfo, carBrand: selectedBrands.label})
     }
   }
   const setServices = (selectedServices) => {

@@ -10,6 +10,8 @@ const Dashboard = () => {
   console.log(user)
 
   let title = ""
+  let leftPanel = ''
+  let rightPanel = ''
   if(user){
 
     if (user.role === "Garage Owner") { title = user.name }

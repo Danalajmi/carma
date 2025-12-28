@@ -20,7 +20,7 @@ const Login = ({ setUser }) => {
     const response = await LogInUser(loginInfo)
     setUser(response)
     setInfo(initValues)
-    Navigate("/new")
+    Navigate("/dash")
   }
   return (
     <div>

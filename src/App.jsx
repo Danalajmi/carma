@@ -13,11 +13,12 @@ import Dashboard from "./pages/Dashboard"
 const App = () => {
   const { user, saveUser, checkToken } = useContext(UserContext)
 
-  
+
 
   return (
     <>
       <h1>Welcome to Carma</h1>
+      <Nav />
       <main>
         <Routes>
           <Route path="/auth/register" element={<Register />} />
