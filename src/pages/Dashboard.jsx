@@ -11,6 +11,9 @@ const Dashboard = () => {
   const [submittedRequests, setSubmittedRequests] = useState([])
   const [interestedRequests, setInterestedRequests] = useState([])
 
+  const handleInterest = (newInterest) => {
+    setInterestedRequests((interests) => [...interests, newInterest])
+  }
 
   let title = user.name
   let leftPanel = user.role === "Garage Owner" ? "Service Requests" : "My Cars"
@@ -26,14 +29,15 @@ const Dashboard = () => {
           <MainDetailsCard
             items={submittedRequests}
             role={user.role}
-            onSubmitRequest={(newRequest) =>
-              setSubmittedRequests((requests) => [...requests, newRequest])
+            onSubmitRequest={
+              user.role === "Car Owner" ? (newRequest) =>
+              setSubmittedRequests((requests) => [...requests, newRequest]) : handleInterest
             }
           />
         </div>
         <div className="right-panel">
           <h2>{rightPanel}</h2>
-            <InterestedCard items={submittedRequests} role={user.role}/>
+            <InterestedCard items={interestedRequests} role={user.role}/>
         </div>
       </div>
     </div>

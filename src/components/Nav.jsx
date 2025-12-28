@@ -3,7 +3,11 @@ import { useContext } from "react"
 import userContext from "../context/userContext"
 
 const Nav = () => {
-  const { user } = useContext(userContext)
+  const { user, saveUser } = useContext(userContext)
+
+  const handleLogout = () => {
+    saveUser(null)
+  }
   return (
     <header>
       <nav>
@@ -11,7 +15,7 @@ const Nav = () => {
         {user ? (
           <>
             <Link to="/dashboard"> My Dashboard </Link>
-            <Link to="/"> Log Out </Link>
+            <button onClick={handleLogout}> Log Out </button>
           </>
         ) : (
           <Link to="/auth/login"> Login </Link>
