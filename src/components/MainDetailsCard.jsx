@@ -18,7 +18,7 @@ const MainDetailsCard = ({ items, role, onSubmitRequest }) => {
   const handleAddRequest = (item) => {
     const newRequest = {
       id: Date.now(),
-      carBrand: item.carBrand,
+      carBrand: item.brand,
       service: services.map (s => s.value).join(", "), // map objects to string
       description: description || "No description provided"
     }
@@ -55,7 +55,7 @@ const MainDetailsCard = ({ items, role, onSubmitRequest }) => {
                     className="dropdown"
                     />
 
-                  <textarea 
+                  <textarea
                     placeholder="Describe the problem"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}

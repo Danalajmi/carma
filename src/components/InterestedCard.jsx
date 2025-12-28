@@ -6,7 +6,7 @@ const InterestedCard = ({ items, role }) => {
       {items.map((item) => (
         <div key={item.id} className="right-card">
           <h3>{item.carBrand}</h3>
-          <p>{item.status}</p>
+          <p>{item.description}</p>
           {role === "Car Owner" ? (<button>View Interested Garages</button>) : (<button>View Request</button>)}
         </div>
       ))}

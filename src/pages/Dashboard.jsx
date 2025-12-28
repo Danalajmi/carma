@@ -42,9 +42,11 @@ const Dashboard = () => {
             }
           />
         </div>
+
+
         <div className="right-panel">
           <h2>{rightPanel}</h2>
-            <InterestedCard items={interestedRequests} role={user.role}/>
+            <InterestedCard items={user.role === "Car Owner" ? submittedRequests : interestedRequests } role={user.role}/>
         </div>
       </div>
     </div>
