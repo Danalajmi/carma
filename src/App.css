@@ -8,6 +8,7 @@
 body {
   margin: 0;
   text-align: center;
+  background: #0f172a;
 }
 
 nav {
@@ -16,6 +17,7 @@ nav {
   justify-content: space-around;
   align-items: center;
   height: 3em;
+  background: #0f172a;
 }
 
 .dashboard-panels {

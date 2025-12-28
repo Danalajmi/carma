@@ -8,3 +8,11 @@ export const createGarage = async (data) => {
     throw error
   }
 }
+export const getAll_garages = async () => {
+  try {
+    const res = await Client.get("/garages")
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

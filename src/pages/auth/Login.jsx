@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { LogInUser } from "../../services/auth"
 import { useNavigate } from "react-router-dom"
+import "../../assets/style/New.css"
 
-const Login = ({setUser}) => {
+const Login = ({ setUser }) => {
   const Navigate = useNavigate()
   const initValues = {
     email: "",
@@ -20,10 +21,10 @@ const Login = ({setUser}) => {
     const response = await LogInUser(loginInfo)
     setUser(response)
     setInfo(initValues)
-    Navigate('/new')
+    Navigate("/dash")
   }
   return (
-    <div>
+    <div className="form-container dark">
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -34,7 +35,7 @@ const Login = ({setUser}) => {
           onChange={handleChange}
           required
         />
-
+        <br />
         <label htmlFor="password">Password</label>
         <input
           type="password"

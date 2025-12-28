@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import New from "../../components/New"
+import "../../assets/style/New.css"
 import { RegisterUser } from "../../services/auth"
-import '../../assets/style/Registry.css'
-
+import "../../assets/style/Registry.css"
 
 const Register = () => {
   const Navigate = useNavigate()
@@ -21,17 +21,16 @@ const Register = () => {
     setValues({ ...userValues, [event.target.name]: event.target.value })
   }
   const setRole = (SelectedRole) => {
-    setValues({...userValues, role: SelectedRole})
+    setValues({ ...userValues, role: SelectedRole })
   }
 
-
-    const handleSubmit = async (e) => {
-      e.preventDefault()
-      await RegisterUser(userValues)
-      Navigate("/auth/login")
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await RegisterUser(userValues)
+    Navigate("/auth/login")
+  }
   return (
-    <div className="Registry">
+    <div className="form-container dark">
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input
@@ -72,20 +71,31 @@ const Register = () => {
           onChange={handleChange}
           required
         />
-
-          <button onClick={() => setRole('Car Owner')}
-            type="button">
+        <div className="role-toggle">
+          <button
+            onClick={() => setRole("Car Owner")}
+            className={`role-btn ${
+              userValues.role === "Car Owner" ? "active" : ""
+            }`}
+            type="button"
+          >
             Car Owner
           </button>
-          <button onClick={() => setRole('Garage Owner')}
-            type="button">
+          <button
+            onClick={() => setRole("Garage Owner")}
+            className={`role-btn ${
+              userValues.role === "Garage Owner" ? "active" : ""
+            }`}
+            type="button"
+          >
             Garage Owner
           </button>
+        </div>
 
-      <button type="submit" onClick={handleSubmit}>Submit</button>
+        <button type="submit" onClick={handleSubmit}>
+          Submit
+        </button>
       </form>
-
-
     </div>
   )
 }

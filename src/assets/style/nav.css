@@ -1,0 +1,68 @@
+/* ===== Header ===== */
+.main-header {
+  position: fixed; /* always on top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+  z-index: 1000;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ===== Home / Logo ===== */
+.nav-logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+/* ===== Right Links ===== */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* ===== Links ===== */
+.nav-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #38bdf8;
+}
+
+/* ===== Register Button ===== */
+.register-btn {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white !important;
+}
+
+/* ===== Logout Button ===== */
+.logout-btn {
+  background: transparent;
+  border: 1px solid #334155;
+  color: #e5e7eb;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
