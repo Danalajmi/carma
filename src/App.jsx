@@ -14,11 +14,8 @@ import ServiceRequestForm from "./components/ServiceRequestForm"
 const App = () => {
   const { user, saveUser, checkToken } = useContext(UserContext)
 
-
-
   return (
     <>
-      <h1>Welcome to Carma</h1>
       <Nav />
       <main>
         <Routes>
@@ -27,7 +24,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />
           <Route path="/dash" element={<Dashboard />} />
-          <Route path="/SRF" element={<ServiceRequestForm />} />
+          <Route path="/SRF" element={<ServiceRequestForm car='my infiniti'/>} />
         </Routes>
       </main>
     </>

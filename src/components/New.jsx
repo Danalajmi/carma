@@ -16,8 +16,7 @@ const New = () => {
 
   const initCar = {
     title: "",
-    // carBrand: "",
-    year: '',
+    year: "",
     model: "",
   }
   const initGarage = {
@@ -45,8 +44,6 @@ const New = () => {
       await createGarage(garageInfo)
       setGarage(initGarage)
     } else if (user.role === "Car Owner") {
-      
-
       await createCar(carInfo)
       setCar(initCar)
     }
@@ -58,18 +55,16 @@ const New = () => {
       let brandString = selectedBrands.map((brand) => brand.label)
       setGarage({ ...garageInfo, carBrands: brandString })
     } else if (user?.role === "Car Owner") {
-
       setCar({ ...carInfo, carBrand: selectedBrands.label })
     }
   }
   const setServices = (selectedServices) => {
     let serviceString = selectedServices.map((service) => service.label)
     setGarage({ ...garageInfo, services: serviceString })
-    console.log(garageInfo.services)
   }
   if (user?.role === "Car Owner") {
     return (
-      <div>
+      <div className="form-container dark">
         <form onSubmit={handleSubmit}>
           <label htmlFor="title">Title</label>
           <input
@@ -78,19 +73,19 @@ const New = () => {
             name="title"
             value={carInfo.title}
             onChange={handleChange}
+            placeholder="Car Name"
           />
-          <br />
 
           <Select
             options={carBrands}
             closeMenuOnSelect={true}
             isMulti={false}
             isSearchable={true}
+            classNamePrefix="react-select"
             className="multiselect"
             onChange={setCarBrand}
             placeholder="Supported Car brands"
           />
-          <br />
 
           <label htmlFor="model">Your Car's model</label>
           <input
@@ -100,7 +95,7 @@ const New = () => {
             value={carInfo.model}
             onChange={handleChange}
           />
-          <br />
+
           <label htmlFor="year">Year of make</label>
           <input
             type="number"
@@ -114,10 +109,10 @@ const New = () => {
         </form>
       </div>
     )
-  } else if(user?.role === "Garage Owner"){
+  } else if (user?.role === "Garage Owner") {
     return (
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="form-container dark">
           {/* <label htmlFor="name">Garage name</label> */}
           <input
             type="text"
@@ -154,6 +149,7 @@ const New = () => {
             closeMenuOnSelect={false}
             isMulti
             isSearchable={true}
+            classNamePrefix="react-select"
             className="multiselect"
             onChange={setCarBrand}
             placeholder="Supported Car brands"
@@ -164,6 +160,7 @@ const New = () => {
             closeMenuOnSelect={false}
             isMulti
             isSearchable={true}
+            classNamePrefix="react-select"
             className="multiselect"
             onChange={setServices}
             placeholder="Offered Services"

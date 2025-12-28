@@ -10,7 +10,6 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(initUser)
 
   useEffect(() => {
-    console.log("here")
     const token = localStorage.getItem("token")
     const checkToken = async () => {
       const userData = await CheckSession()
