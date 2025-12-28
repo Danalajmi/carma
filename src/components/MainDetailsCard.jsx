@@ -4,7 +4,7 @@ import Select from "react-select"
 
 const serviceData = services
 
-const MainDetailsCard = ({ items, role, onSubmitRequest }) => {
+const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
 
   const [expandedId, setExpandedId] = useState(null)
   const [services, setServices] = useState([])
@@ -18,7 +18,7 @@ const MainDetailsCard = ({ items, role, onSubmitRequest }) => {
   const handleAddRequest = (item) => {
     const newRequest = {
       id: Date.now(),
-      carBrand: item.brand,
+      brand: item.brand,
       model: item.model,
       service: services.map (s => s.label).join(", "), // map objects to string
       description: description || "No description provided"
@@ -62,12 +62,14 @@ const MainDetailsCard = ({ items, role, onSubmitRequest }) => {
                     onChange={(e) => setDescription(e.target.value)}
                   />
                   <br></br>
+
                   <button onClick={() => handleAddRequest(item)}>Submit Request</button>
                 </div>
               )}
             </>
           ) : (
-          <button onClick={() => onSubmitRequest(item)}>Show Interest</button>
+          !requestIds.includes(item.id) && ( //if item id exists, then button won't render
+          <button onClick={() => onSubmitRequest(item)}>Show Interest</button>)
           )}
         </div>
       ))}
