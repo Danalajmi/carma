@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import Select from "react-select"
 import services from "../assets/services.json"
+import carBrands from "../assets/carBrands.json"
 
 const ServiceRequestForm = ({ ServiceRequest, setServiceRequest }) => {
   const initialState = { Car: null, Service: [], Description: "" }
@@ -12,11 +13,11 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest }) => {
     const fetchCars = async () => {
       const res = await axios.get("http://localhost:3000/cars")
 
-      const carOptions = res.data.map((car) => ({
+      const cars = res.data.map((car) => ({
         value: car._id
       }))
 
-      setCars(carOptions)
+      setCars(cars)
     }
 
     fetchCars()
@@ -29,15 +30,15 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const payload = {
+    const form = {
       car: formState.Car.value,
-      service: formState.Service.map((s) => s.value),
+      service: formState.Service.map((service) => service.value),
       description: formState.Description,
     }
 
     const response = await axios.post(
       "http://localhost:3000/servicereqs",
-      payload
+      form
     )
 
     setServiceRequest([...ServiceRequest, response.data])
@@ -48,7 +49,7 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest }) => {
     <form onSubmit={handleSubmit}>
       <label>Your Car</label>
       <Select
-        options={cars}
+        options={carBrands}
         value={formState.Car}
         onChange={(selected) => setFormState({ ...formState, Car: selected })}
         placeholder="Select your car"
