@@ -19,7 +19,8 @@ const MainDetailsCard = ({ items, role, onSubmitRequest }) => {
     const newRequest = {
       id: Date.now(),
       carBrand: item.brand,
-      service: services.map (s => s.value).join(", "), // map objects to string
+      model: item.model,
+      service: services.map (s => s.label).join(", "), // map objects to string
       description: description || "No description provided"
     }
     onSubmitRequest(newRequest)
