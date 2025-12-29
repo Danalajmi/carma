@@ -1,42 +1,39 @@
-import { useState } from "react"
-import services from "../assets/services.json"
-import Select from "react-select"
+import { useEffect, useState } from "react"
 import ServiceRequestForm from "./ServiceRequestForm"
 
-const serviceData = services
-
-const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
-
+const MainDetailsitemd = ({ items, role, onSubmitRequest, requestIds }) => {
   const [expandedId, setExpandedId] = useState(null)
-  const [services, setServices] = useState([])
-  const [description, setDescription] = useState("")
+  
 
-  const toggleExpand = (id) =>{
+  const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
-  }
-
-
-  const handleAddRequest = (item) => {
-    const newRequest = {
-      id: Date.now(),
-      brand: item.brand,
-      model: item.model,
-      service: services.map (s => s.label).join(", "), // map objects to string
-      description: description || "No description provided"
-    }
-    onSubmitRequest(newRequest)
-    setServices([])
-    setDescription("")
-    // setExpandedId(null)
   }
 
   return (
     <div className="left-panel">
       {items.map((item) => (
         <div key={item.id} className="left-card">
-          <h3>{item.brand} | {item.model}</h3>
-          <p>Request for: <strong>{item.service}</strong></p>
-          <p>Description: {item.description}</p>
+          {role === "Car Owner" ? (
+            <>
+              <h3>
+                {item.title} | {item.model}
+              </h3>
+            </>
+          ) : (
+            <>
+              <h3>
+                {item.car.title} | {item.car.model}
+              </h3>
+            </>
+          )}
+          {role === "Garage Owner" ? (
+            <>
+              <p>
+                Request for: <strong>{item.car.carBrand}</strong>
+              </p>
+              <p>Description: {item.description}</p>
+            </>
+          ) : null}
 
           {role === "Car Owner" ? (
             <>
@@ -44,13 +41,14 @@ const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
                 {expandedId === item.id ? "Close Form" : "Open Service Request"}
               </button>
 
-              {expandedId === item.id && (
-                <ServiceRequestForm car={item.title}/>
-              )}
+              {expandedId === item.id && <ServiceRequestForm item={item.title} />}
             </>
           ) : (
-          !requestIds.includes(item.id) && ( //if item id exists, then button won't render
-          <button onClick={() => onSubmitRequest(item)}>Show Interest</button>)
+            !requestIds.includes(item.id) && ( //if item id exists, then button won't render
+              <button onClick={() => onSubmitRequest(item)}>
+                Show Interest
+              </button>
+            )
           )}
         </div>
       ))}
@@ -58,4 +56,4 @@ const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
   )
 }
 
-export default MainDetailsCard
+export default MainDetailsitemd
