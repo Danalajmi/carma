@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+
 import ServiceRequestForm from "./ServiceRequestForm"
 import ItemCard from "./ItemCard"
 
@@ -13,6 +14,7 @@ const MainDetailsCard = ({
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
+    const navigate = useNavigate()
   }
 
   return (
