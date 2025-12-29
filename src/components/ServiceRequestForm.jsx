@@ -6,8 +6,8 @@ import carBrands from "../assets/carBrands.json"
 import { sendRequest } from "../services/serviceReq"
 import "../assets/style/New.css"
 
-const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car }) => {
-  const initialState = { Car: null, Service: [], Description: "" }
+const ServiceRequestForm = ({ submittedRequests, setSubmittedRequests, car }) => {
+  const initialState = { Service: [], Description: "" }
   const [formState, setFormState] = useState(initialState)
   const [cars, setCars] = useState([])
 
@@ -29,21 +29,23 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car }) => {
     setFormState({ ...formState, [event.target.name]: event.target.value })
   }
 
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
     const form = {
 
-      service: formState.Service.map((service) => service.value),
+      service: formState.Service.map((service) => service.label),
       description: formState.Description,
     }
 
     let response = await sendRequest(car, form)
 
-    // setServiceRequest([...ServiceRequest, response.data])
+    // TypeError: submittedRequests is not iterable
+    setSubmittedRequests([[...submittedRequests], response.data])
 
     setFormState(initialState)
-    
+
   }
 
   return (
@@ -54,13 +56,18 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car }) => {
         <label>Offered Services</label>
         <Select
           options={services}
+          closeMenuOnSelect={false}
           isMulti
+          isSearchable={true}
           value={formState.Service}
+          classNamePrefix="react-select"
+          className="multiselect"
           onChange={(selected) =>
             setFormState({ ...formState, Service: selected })
           }
           placeholder="Offered Services"
         />
+
 
         <label>Description</label>
         <textarea
