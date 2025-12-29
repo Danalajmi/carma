@@ -2,9 +2,8 @@ import { useEffect, useState } from "react"
 import ServiceRequestForm from "./ServiceRequestForm"
 
 const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
+
   const [expandedId, setExpandedId] = useState(null)
-
-
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
   }
@@ -40,8 +39,8 @@ const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
               <button onClick={() => toggleExpand(item.id)}>
                 {expandedId === item.id ? "Close Form" : "Open Service Request"}
               </button>
+              {expandedId === item.id && <ServiceRequestForm item={item.title} collapseForm={() => setExpandedId(null)} />} {/* added collapseForm function here and exported to ServiceRequestForm*/}
 
-              {expandedId === item.id && <ServiceRequestForm item={item.title} />}
             </>
           ) : (
             !requestIds.includes(item.id) && ( //if item id exists, then button won't render

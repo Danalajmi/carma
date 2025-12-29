@@ -6,7 +6,7 @@ import carBrands from "../assets/carBrands.json"
 import { sendRequest } from "../services/serviceReq"
 import "../assets/style/New.css"
 
-const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car }) => {
+const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car, collapseForm }) => {
   const initialState = { Car: null, Service: [], Description: "" }
   const [formState, setFormState] = useState(initialState)
   const [cars, setCars] = useState([])
@@ -39,11 +39,11 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car }) => {
     }
 
     let response = await sendRequest(car, form)
-
+    collapseForm()
     // setServiceRequest([...ServiceRequest, response.data])
 
-    setFormState(initialState)
-    
+    // setFormState(initialState)
+
   }
 
   return (
