@@ -7,7 +7,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import userContext from "../context/userContext.jsx"
 
 const EditCar = () => {
-  const { title } = useParams()
+  const { carId } = useParams()
   const navigate = useNavigate()
 
   const [carInfo, setCarInfo] = useState({
@@ -23,7 +23,7 @@ const EditCar = () => {
   useEffect(() => {
     const fetchCarData = async () => {
       const cars = await getCars()
-      const car = cars.find((c) => c.title === title)
+      const car = cars.find((c) => c._id === carId)
 
       if (car) {
         setCarInfo({
@@ -32,13 +32,12 @@ const EditCar = () => {
           model: car.model || "",
           carBrand: car.carBrand || "",
         })
-        setOriginalTitle(car.title)
       }
       setLoading(false)
     }
 
     fetchCarData()
-  }, [title, navigate])
+  }, [carId, navigate])
 
   const handleChange = (event) => {
     setCarInfo({ ...carInfo, [event.target.name]: event.target.value })
@@ -46,21 +45,21 @@ const EditCar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const dataToSend = {
-      ...carInfo,
+      title: carInfo.title,
+      model: carInfo.model,
       year: Number(carInfo.year),
-      title: originalTitle,
+      carBrand: carInfo.carBrand,
     }
-    await updateCar(dataToSend)
+    await updateCar(carId, dataToSend)
     navigate("/dashboard")
   }
 
   const handleDelete = async () => {
     if (window.confirm(`Are you sure you want to delete ${carInfo.title}?`)) {
-      await deleteCar(originalTitle)
+      await deleteCar(carId)
       navigate("/dashboard")
     }
   }
-
   const setCarBrand = (selectedBrand) => {
     setCarInfo({ ...carInfo, carBrand: selectedBrand.label })
   }
@@ -134,7 +133,6 @@ const EditCar = () => {
             onClick={() => navigate("/dashboard")}
             style={{
               flex: 1,
-              background: "#475569",
             }}
           >
             Cancel
