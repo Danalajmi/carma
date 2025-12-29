@@ -8,3 +8,12 @@ export const createCar = async (data) => {
     throw error
   }
 }
+
+export const getCars = async () => {
+  try {
+    const res = await Client.get('/cars/myCars')
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

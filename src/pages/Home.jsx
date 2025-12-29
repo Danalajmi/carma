@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { getAll_garages } from "../services/garage"
 import { useState } from "react"
 import Garage from "../components/Garage"
+import "../assets/style/home.css"
 const Home = () => {
   const [garages, setGarages] = useState([])
   useEffect(() => {
@@ -13,7 +14,7 @@ const Home = () => {
     Allgarages()
   }, [])
   return (
-    <div>
+    <div className="garage-grid">
       {garages.map((garage) => (
         <Garage key={garage.id} garage={garage} />
       ))}

@@ -1,35 +1,40 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import userContext from "../context/userContext"
 import MainDetailsCard from "../components/MainDetailsCard"
 import InterestedCard from "../components/InterestedCard"
 import services from "../assets/services.json"
-
+import { getCars } from "../services/car"
+import { getRequests } from "../services/serviceReq"
 const Dashboard = () => {
   const { user } = useContext(userContext)
 
   const [requestIds, setRequestIds] = useState([])
 
   // my sample cars
-  const [cars, setCars] = useState([
-    { id: 1, brand: "BMW", model: "2021" },
-    { id: 2, brand: "Audi", model: "2020" }
-  ]);
+  const [cars, setCars] = useState([])
 
   // my sample submitted requests
-  const [submittedRequests, setSubmittedRequests] = useState([
-    { id: 1, brand: "BMW", model: "2021", service: "tyres", description:"Tyres need camber alignment" },
-    { id: 2, brand: "Audi", model: "2020", service: "hvac, paint", description:"Need the ac to work" }
-  ])
+  const [submittedRequests, setSubmittedRequests] = useState([])
   const [interestedRequests, setInterestedRequests] = useState([])
 
+  useEffect(() => {
+    const getmycarsAndIntrests = async () => {
+      let mycars = await getCars()
+      setCars(mycars)
+      let myInterests = await getRequests()
+      setSubmittedRequests(myInterests)
+    }
+    getmycarsAndIntrests()
+  }, [])
 
   const handleInterest = (newInterest) => {
     setInterestedRequests((interests) => [...interests, newInterest])
     setRequestIds((ids) => [...ids, newInterest.id])
   }
-  let title = user.name
-  let leftPanel = user.role === "Garage Owner" ? "Service Requests" : "My Cars"
-  let rightPanel = user.role === "Garage Owner" ? "My Interests" : "Sent Requests"
+  let title = user?.name
+  let leftPanel = user?.role === "Garage Owner" ? "Service Requests" : "My Cars"
+  let rightPanel =
+    user?.role === "Garage Owner" ? "My Interests" : "Sent Requests"
 
   return (
     <div className="dashboard">
@@ -38,24 +43,35 @@ const Dashboard = () => {
         <div className="left-panel">
           <h2>{leftPanel}</h2>
           <MainDetailsCard
-            items={user.role === "Car Owner" ? cars : submittedRequests}
-            role={user.role}
+            items={user?.role === "Car Owner" ? cars : submittedRequests}
+            role={user?.role}
             onSubmitRequest={
-              user.role === "Car Owner" ? (newRequest) =>
-              setSubmittedRequests((requests) => [...requests, newRequest]) : handleInterest
-            } requestIds={requestIds}
+              user?.role === "Car Owner"
+                ? (newRequest) =>
+                    setSubmittedRequests((requests) => [
+                      ...requests,
+                      newRequest,
+                    ])
+                : handleInterest
+            }
+            requestIds={requestIds}
           />
         </div>
 
-
         <div className="right-panel">
           <h2>{rightPanel}</h2>
-            <InterestedCard items={user.role === "Car Owner" ? submittedRequests : interestedRequests } role={user.role} />
+          <InterestedCard
+            items={
+              user?.role === "Car Owner"
+                ? submittedRequests
+                : interestedRequests
+            }
+            role={user?.role}
+          />
         </div>
       </div>
     </div>
   )
-
 }
 
 export default Dashboard

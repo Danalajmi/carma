@@ -1,0 +1,9 @@
+.garage-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.garage-grid > * {
+  flex: 1 1 280px;
+}
