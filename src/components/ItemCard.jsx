@@ -11,7 +11,7 @@ const ItemCard = ({ item }) => {
   }
 
   return (
-      <div className="left-card">
+    <div className="left-card">
       {role === "Car Owner" ? (
         <>
           <h3>
@@ -40,12 +40,22 @@ const ItemCard = ({ item }) => {
             {expandedId === item.id ? "Close Form" : "Open Service Request"}
           </button>
 
+          <button
+            onClick={() => handleEdit(item.title)}
+            className="button-flex edit-car-btn"
+          >
+            Edit Car
+          </button>
 
-          {expandedId === item.id && <ServiceRequestForm car={item.title} collapseForm={() => setExpandedId(null)} />}
+          {expandedId === item.id && (
+            <ServiceRequestForm
+              car={item.title}
+              collapseForm={() => setExpandedId(null)}
+            />
+          )}
         </>
       ) : (
         <h1>hi</h1>
-
 
         // !requestIds.includes(item?._id) && ( //if item id exists, then button won't render
         //   <button onClick={() => onSubmitRequest(item)}>Show Interest</button>
@@ -54,5 +64,4 @@ const ItemCard = ({ item }) => {
     </div>
   )
 }
-export default ItemCard;
-
+export default ItemCard
