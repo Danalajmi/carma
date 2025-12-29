@@ -6,7 +6,7 @@ import carBrands from "../assets/carBrands.json"
 import { sendRequest } from "../services/serviceReq"
 import "../assets/style/New.css"
 
-const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car, collapseForm,submittedRequests, setSubmittedRequests }) => {
+const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car, collapseForm, submittedRequests, setSubmittedRequests }) => {
   const initialState = { Car: null, Service: [], Description: "" }
   const [formState, setFormState] = useState(initialState)
   const [cars, setCars] = useState([])

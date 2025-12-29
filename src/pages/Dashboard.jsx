@@ -26,12 +26,10 @@ const Dashboard = () => {
       let mycars = await getCars()
       setCars(mycars)
       let myInterests = await getRequests()
-      console.log(myInterests)
-
       setSubmittedRequests(myInterests)
     }
     getmycarsAndIntrests()
-  }, [submittedRequests,interestedRequests])
+  }, [submittedRequests, interestedRequests])
 
   // const handleInterest = (newInterest) => {
   //   setInterestedRequests((interests) => [...interests, newInterest])

@@ -41,7 +41,7 @@ const ItemCard = ({ item }) => {
           </button>
 
 
-          {expandedId === item.id && <ServiceRequestForm car={item.title} />}
+          {expandedId === item.id && <ServiceRequestForm car={item.title} collapseForm={() => setExpandedId(null)} />}
         </>
       ) : (
         <h1>hi</h1>
