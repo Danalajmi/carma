@@ -16,3 +16,4 @@ export const getAll_garages = async () => {
     throw error
   }
 }
+

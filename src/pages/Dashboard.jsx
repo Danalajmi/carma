@@ -5,9 +5,13 @@ import InterestedCard from "../components/InterestedCard"
 import services from "../assets/services.json"
 import { getCars } from "../services/car"
 import { getRequests } from "../services/serviceReq"
+
+
 const Dashboard = () => {
   const { user } = useContext(userContext)
 
+
+  // explain this whole thing to me plz
   const [requestIds, setRequestIds] = useState([])
 
   // my sample cars
@@ -22,15 +26,18 @@ const Dashboard = () => {
       let mycars = await getCars()
       setCars(mycars)
       let myInterests = await getRequests()
+      console.log(myInterests)
+
       setSubmittedRequests(myInterests)
     }
     getmycarsAndIntrests()
-  }, [])
+  }, [submittedRequests,interestedRequests])
 
-  const handleInterest = (newInterest) => {
-    setInterestedRequests((interests) => [...interests, newInterest])
-    setRequestIds((ids) => [...ids, newInterest.id])
-  }
+  // const handleInterest = (newInterest) => {
+  //   setInterestedRequests((interests) => [...interests, newInterest])
+  //   setRequestIds((ids) => [...ids, newInterest.id])
+  // }
+
   let title = user?.name
   let leftPanel = user?.role === "Garage Owner" ? "Service Requests" : "My Cars"
   let rightPanel =
@@ -44,17 +51,18 @@ const Dashboard = () => {
           <h2>{leftPanel}</h2>
           <MainDetailsCard
             items={user?.role === "Car Owner" ? cars : submittedRequests}
-            role={user?.role}
-            onSubmitRequest={
-              user?.role === "Car Owner"
-                ? (newRequest) =>
-                    setSubmittedRequests((requests) => [
-                      ...requests,
-                      newRequest,
-                    ])
-                : handleInterest
-            }
+            // onSubmitRequest={
+            //   user?.role === "Car Owner"
+            //     ? (newRequest) =>
+            //         setSubmittedRequests((requests) => [
+            //           ...requests,
+            //           newRequest,
+            //         ])
+            //     : handleInterest
+            // }
             requestIds={requestIds}
+            submittedRequests= {submittedRequests}
+            setSubmittedRequests={setSubmittedRequests}
           />
         </div>
 
@@ -66,7 +74,7 @@ const Dashboard = () => {
                 ? submittedRequests
                 : interestedRequests
             }
-            role={user?.role}
+
           />
         </div>
       </div>

@@ -1,21 +1,27 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState,useContext } from "react"
+import UserContext from "../context/userContext"
 
-const InterestedCard = ({ items, role }) => {
+const InterestedCard = ({ items }) => {
+const { user } = useContext(UserContext)
+  const role = user?.role
   const [expandedId, setExpandedId] = useState(null)
+  const [garageExpand, setGarageExpand] = useState(false)
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
   }
+  let reveresedItems = items.toReversed()
 
   return (
     <div className="right-panel">
       <h4>Total Requests: {items.length}</h4>
-      {items.map((item) => (
+
+      {reveresedItems.map((item) => (
         <div key={item.id} className="right-card">
           <h3>
-            {item.car.carBrand} | {item.car.model}
+            {item.car?.carBrand} | {item.car?.model}
           </h3>
           <p>
-            Request for: <strong>{item.car.carBrand}</strong>
+            Request for: <strong>{item.car?.carBrand}</strong>
           </p>
 
           <button onClick={() => toggleExpand(item.id)}>
@@ -23,11 +29,13 @@ const InterestedCard = ({ items, role }) => {
           </button>
           {expandedId === item.id && (
             <div className="request-details">
+              {/* fix spacing issues here */}
+              <p>Services Required: {item.service}</p>
               <p>Description: {item.description}</p>
             </div>
           )}
 
-          {role === "Car Owner" && <button>View Interested Garages</button>}
+          {role === "Car Owner" && <button onClick={() => {setGarageExpand(!garageExpand) }}>View Interested Garages</button> }
         </div>
       ))}
     </div>
