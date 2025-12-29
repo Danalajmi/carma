@@ -26,7 +26,7 @@ const Dashboard = () => {
       let mycars = await getCars()
       setCars(mycars)
       let myInterests = await getRequests()
-      console.log(myInterests)
+      
 
       setSubmittedRequests(myInterests)
     }
