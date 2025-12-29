@@ -11,8 +11,8 @@ const Dashboard = () => {
 
   // my sample cars
   const [cars, setCars] = useState([
-    { id: 1, brand: "BMW", model: "2021" },
-    { id: 2, brand: "Audi", model: "2020" }
+    { id: 1, brand: "BMW", model: "2021", title:"my cutie BMW" },
+    { id: 2, brand: "Audi", model: "2020", title: "My audi" }
   ]);
 
   // my sample submitted requests
@@ -38,6 +38,7 @@ const Dashboard = () => {
         <div className="left-panel">
           <h2>{leftPanel}</h2>
           <MainDetailsCard
+          cars = {cars}
             items={user.role === "Car Owner" ? cars : submittedRequests}
             role={user.role}
             onSubmitRequest={

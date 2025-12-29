@@ -1,6 +1,7 @@
 import { useState } from "react"
 import services from "../assets/services.json"
 import Select from "react-select"
+import ServiceRequestForm from "./ServiceRequestForm"
 
 const serviceData = services
 
@@ -44,31 +45,7 @@ const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
               </button>
 
               {expandedId === item.id && (
-                <div className="service-request-form">
-                  <h4>Service Request Form</h4>
-                  <Select
-                    options={serviceData}
-                    closeMenuOnSelect={false}
-                    isMulti
-                    isSearchable={true}
-                    value={services}
-                    onChange={setServices}
-                    placeholder="Select services"
-                    className="dropdown"
-                    />
-
-                  <textarea
-                    placeholder="Describe the problem"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                  <br></br>
-
-                  <button
-                    onClick={() => handleAddRequest(item)}
-                    disabled={services.length === 0} //disables submit request button if no service is selected
-                      >Submit Request</button>
-                </div>
+                <ServiceRequestForm car={item.title}/>
               )}
             </>
           ) : (

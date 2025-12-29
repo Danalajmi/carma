@@ -60,7 +60,4 @@ https://github.com/Danalajmi/carma-BE
 - Automatic filtering of garages based on:
   - Car model
   - Requested service
-- Reviews:
-  - Pulled from Google Maps
-  - User-submitted reviews
 - Scalable REST API architecture
