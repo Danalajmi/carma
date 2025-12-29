@@ -18,10 +18,9 @@ export const getCars = async () => {
   }
 }
 
-export const updateCar = async (title, data) => {
-  //
+export const updateCar = async (data) => {
   try {
-    const res = await Client.put(`/cars/myCars/${title}`, data) //
+    const res = await Client.put(`/cars/myCars/${data.title}`, data)
     return res.data
   } catch (error) {
     throw error
@@ -30,7 +29,7 @@ export const updateCar = async (title, data) => {
 
 export const deleteCar = async (title) => {
   try {
-    const res = await Client.delete(`/cars/myCars/${title}`)
+    const res = await Client.delete(`/cars/myCars/${data._id}`)
     return res.data
   } catch (error) {
     throw error

@@ -11,7 +11,6 @@ const ItemCard = ({ item }) => {
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
   }
-
   const handleEdit = (carTitle) => {
     navigate(`/edit-car/${carTitle}`)
   }

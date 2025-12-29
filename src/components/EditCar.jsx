@@ -43,10 +43,14 @@ const EditCar = () => {
   const handleChange = (event) => {
     setCarInfo({ ...carInfo, [event.target.name]: event.target.value })
   }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const result = await updateCar(originalTitle, carInfo)
+    const dataToSend = {
+      ...carInfo,
+      year: Number(carInfo.year),
+      title: originalTitle,
+    }
+    await updateCar(dataToSend)
     navigate("/dashboard")
   }
 

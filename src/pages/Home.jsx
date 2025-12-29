@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div className="garage-grid">
       {garages.map((garage) => (
-        <Garage key={garage.id} garage={garage} />
+        <Garage key={garage._id} garage={garage} />
       ))}
     </div>
   )
