@@ -12,7 +12,7 @@
 .form-container.dark {
   background: #020617;
   border: 1px solid #1e293b;
-  color: #e5e7eb;
+  color: #0055ff;
 }
 
 /* ===== Form ===== */
@@ -142,7 +142,7 @@
   background: linear-gradient(135deg, #2563eb, #38bdf8);
   color: white;
   border: none;
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
+  box-shadow: 0 0 0 2px rgba(109, 129, 137, 0.3);
 }
 
 /* Press effect */

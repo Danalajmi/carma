@@ -18,18 +18,18 @@ export const getCars = async () => {
   }
 }
 
-export const updateCar = async (data) => {
+export const updateCar = async (id, data) => {
   try {
-    const res = await Client.put(`/cars/myCars/${data.title}`, data)
+    const res = await Client.put(`/cars/myCars/${id}`, data)
     return res.data
   } catch (error) {
     throw error
   }
 }
 
-export const deleteCar = async (title) => {
+export const deleteCar = async (id) => {
   try {
-    const res = await Client.delete(`/cars/myCars/${data._id}`)
+    const res = await Client.delete(`/cars/myCars/${id}`)
     return res.data
   } catch (error) {
     throw error

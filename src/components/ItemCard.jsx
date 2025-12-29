@@ -11,10 +11,9 @@ const ItemCard = ({ item }) => {
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
   }
-  const handleEdit = (carTitle) => {
-    navigate(`/edit-car/${carTitle}`)
+  const handleEdit = (carId) => {
+    navigate(`/edit-car/${carId}`)
   }
-
   return (
     <div className="left-card">
       {role === "Car Owner" ? (
@@ -46,7 +45,7 @@ const ItemCard = ({ item }) => {
           </button>
 
           <button
-            onClick={() => handleEdit(item.title)}
+            onClick={() => handleEdit(item._id)}
             className="button-flex edit-car-btn"
           >
             Edit Car

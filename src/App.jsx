@@ -29,7 +29,7 @@ const App = () => {
             path="/SRF"
             element={<ServiceRequestForm car="my infiniti" />}
           />
-          <Route path="/edit-car/:title" element={<EditCar />} />
+          <Route path="/edit-car/:carId" element={<EditCar />} />
         </Routes>
       </main>
     </>
