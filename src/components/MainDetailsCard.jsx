@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import ServiceRequestForm from "./ServiceRequestForm"
 
-const MainDetailsitemd = ({ items, role, onSubmitRequest, requestIds }) => {
+const MainDetailsCard = ({ items, role, onSubmitRequest, requestIds }) => {
   const [expandedId, setExpandedId] = useState(null)
-  
+
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
@@ -56,4 +56,4 @@ const MainDetailsitemd = ({ items, role, onSubmitRequest, requestIds }) => {
   )
 }
 
-export default MainDetailsitemd
+export default MainDetailsCard

@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/auth/login" element={<Login setUser={saveUser} />} />
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />
-          <Route path="/dash" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/SRF" element={<ServiceRequestForm car='my infiniti'/>} />
         </Routes>
       </main>
