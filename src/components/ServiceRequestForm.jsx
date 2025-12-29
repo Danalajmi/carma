@@ -6,8 +6,8 @@ import carBrands from "../assets/carBrands.json"
 import { sendRequest } from "../services/serviceReq"
 import "../assets/style/New.css"
 
-const ServiceRequestForm = ({ submittedRequests, setSubmittedRequests, car }) => {
-  const initialState = { Service: [], Description: "" }
+const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car, collapseForm,submittedRequests, setSubmittedRequests }) => {
+  const initialState = { Car: null, Service: [], Description: "" }
   const [formState, setFormState] = useState(initialState)
   const [cars, setCars] = useState([])
 
@@ -40,11 +40,10 @@ const ServiceRequestForm = ({ submittedRequests, setSubmittedRequests, car }) =>
     }
 
     let response = await sendRequest(car, form)
+    collapseForm()
+    // setServiceRequest([...ServiceRequest, response.data])
 
-    // TypeError: submittedRequests is not iterable
-    setSubmittedRequests([[...submittedRequests], response.data])
-
-    setFormState(initialState)
+    // setFormState(initialState)
 
   }
 
