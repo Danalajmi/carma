@@ -21,7 +21,7 @@ const Login = ({ setUser }) => {
     const response = await LogInUser(loginInfo)
     setUser(response)
     setInfo(initValues)
-    Navigate("/dash")
+    Navigate("/dashboard")
   }
   return (
     <div className="form-container dark">

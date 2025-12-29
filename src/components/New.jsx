@@ -47,7 +47,7 @@ const New = () => {
       await createCar(carInfo)
       setCar(initCar)
     }
-    Navigate("/dash")
+    Navigate("/dashboard")
   }
 
   const setCarBrand = (selectedBrands) => {
