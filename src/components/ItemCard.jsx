@@ -1,13 +1,19 @@
 import ServiceRequestForm from "./ServiceRequestForm"
 import { useContext, useState } from "react"
 import UserContext from "../context/userContext"
+import { useNavigate } from "react-router-dom"
 
 const ItemCard = ({ item }) => {
   const { user } = useContext(UserContext)
+  const navigate = useNavigate()
   const role = user.role
   const [expandedId, setExpandedId] = useState(null)
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
+  }
+
+  const handleEdit = (carTitle) => {
+    navigate(`/edit-car/${carTitle}`)
   }
 
   return (

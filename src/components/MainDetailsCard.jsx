@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+
 import ServiceRequestForm from "./ServiceRequestForm"
 import ItemCard from "./ItemCard"
 
@@ -11,10 +11,6 @@ const MainDetailsCard = ({
   setSubmittedRequests,
 }) => {
   const [expandedId, setExpandedId] = useState(null)
-
-  const handleEdit = (carTitle) => {
-    navigate(`/edit-car/${carTitle}`)
-  }
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)

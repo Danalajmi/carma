@@ -3,7 +3,7 @@ import Select from "react-select"
 import "../assets/style/New.css"
 import carBrands from "../assets/carBrands.json"
 import { updateCar, deleteCar, getCars } from "../services/car"
-import { useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import userContext from "../context/userContext.jsx"
 
 const EditCar = () => {
