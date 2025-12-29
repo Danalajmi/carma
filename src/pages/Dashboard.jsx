@@ -1,62 +1,61 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import userContext from "../context/userContext"
 import MainDetailsCard from "../components/MainDetailsCard"
 import InterestedCard from "../components/InterestedCard"
-import { useNavigate } from "react-router-dom"
-import ServiceRequestForm from "../components/ServiceRequestForm"
+import services from "../assets/services.json"
 
 const Dashboard = () => {
-  const Navigate = useNavigate()
   const { user } = useContext(userContext)
 
-  let title = ""
-  let leftPanel = ""
-  let rightPanel = ""
-  if (user) {
-    if (user.role === "Garage Owner") {
-      title = user.name
-    } else if (user.role === "Car Owner") {
-      title = user.name
-    } else {
-      title = "Who let you in here?"
-    }
+  const [requestIds, setRequestIds] = useState([])
 
-    let leftPanel = ""
-    if (user.role === "Garage Owner") {
-      leftPanel = "Service Requests"
-    } else if (user.role === "Car Owner") {
-      leftPanel = "My Cars"
-    }
+  // my sample cars
+  const [cars, setCars] = useState([
+    { id: 1, brand: "BMW", model: "2021" },
+    { id: 2, brand: "Audi", model: "2020" }
+  ]);
 
-    let rightPanel = ""
-    if (user.role === "Garage Owner") {
-      rightPanel = "My Interests"
-    } else if (user.role === "Car Owner") {
-      rightPanel = "Sent Requests"
-    }
+  // my sample submitted requests
+  const [submittedRequests, setSubmittedRequests] = useState([
+    { id: 1, brand: "BMW", model: "2021", service: "tyres", description:"Tyres need camber alignment" },
+    { id: 2, brand: "Audi", model: "2020", service: "hvac, paint", description:"Need the ac to work" }
+  ])
+  const [interestedRequests, setInterestedRequests] = useState([])
+
+
+  const handleInterest = (newInterest) => {
+    setInterestedRequests((interests) => [...interests, newInterest])
+    setRequestIds((ids) => [...ids, newInterest.id])
   }
+  let title = user.name
+  let leftPanel = user.role === "Garage Owner" ? "Service Requests" : "My Cars"
+  let rightPanel = user.role === "Garage Owner" ? "My Interests" : "Sent Requests"
 
-  return user ? (
+  return (
     <div className="dashboard">
       <h1>{title} Dashboard</h1>
-
       <div className="dashboard-panels">
         <div className="left-panel">
-          <p>___________________</p>
           <h2>{leftPanel}</h2>
-          <MainDetailsCard />
+          <MainDetailsCard
+            items={user.role === "Car Owner" ? cars : submittedRequests}
+            role={user.role}
+            onSubmitRequest={
+              user.role === "Car Owner" ? (newRequest) =>
+              setSubmittedRequests((requests) => [...requests, newRequest]) : handleInterest
+            } requestIds={requestIds}
+          />
         </div>
 
+
         <div className="right-panel">
-          <p>___________________</p>
           <h2>{rightPanel}</h2>
-          <InterestedCard />
+            <InterestedCard items={user.role === "Car Owner" ? submittedRequests : interestedRequests } role={user.role} />
         </div>
       </div>
     </div>
-  ) : (
-    Navigate("/")
   )
+
 }
 
 export default Dashboard
