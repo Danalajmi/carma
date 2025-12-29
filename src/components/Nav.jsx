@@ -9,6 +9,7 @@ const Nav = () => {
   const handleLogOut = (e) => {
     saveUser(null)
     localStorage.clear()
+
   }
   return (
     <header className="main-header">
@@ -23,9 +24,9 @@ const Nav = () => {
               <Link to="/new">
                 Add a new {user.role === "Car Owner" ? "Car" : "Garage"}
               </Link>
-              <button onClick={handleLogOut} className="logout-btn">
+              <Link onClick={handleLogOut} className="logout-btn" to='/'>
                 Log Out
-              </button>
+              </Link>
             </>
           ) : (
             <>
