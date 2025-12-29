@@ -4,8 +4,7 @@ import carBrands from "../assets/carBrands.json"
 import services from "../assets/services.json"
 
 import "../assets/style/New.css"
-import { updateCar } from "../services/car.js"
-
+import { updateCar, deleteCar, getCars } from "../services/car"
 import { useNavigate } from "react-router-dom"
 import userContext from "../context/userContext.jsx"
 
