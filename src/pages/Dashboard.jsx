@@ -5,7 +5,6 @@ import InterestedCard from "../components/InterestedCard"
 import services from "../assets/services.json"
 
 const Dashboard = () => {
-  const Navigate = useNavigate()
   const { user } = useContext(userContext)
 
   const [requestIds, setRequestIds] = useState([])
@@ -55,9 +54,8 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-  ) : (
-    Navigate("/")
   )
+
 }
 
 export default Dashboard

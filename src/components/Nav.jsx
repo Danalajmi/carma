@@ -19,7 +19,7 @@ const Nav = () => {
         <div className="nav-links">
           {user ? (
             <>
-              <Link to="/dash"> My Dashboard </Link>
+              <Link to="/dashboard"> My Dashboard </Link>
               <Link to="/new">
                 Add a new {user.role === "Car Owner" ? "Car" : "Garage"}
               </Link>
