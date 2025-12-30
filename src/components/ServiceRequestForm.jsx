@@ -76,7 +76,7 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car, collapseFo
           value={formState.Description}
         />
 
-        <button type="submit">Send</button>
+        <button type="submit">Submit Request</button>
       </form>
     </div>
   )

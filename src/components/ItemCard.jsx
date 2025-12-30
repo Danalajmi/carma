@@ -14,12 +14,16 @@ const ItemCard = ({ item }) => {
   const handleEdit = (carId) => {
     navigate(`/edit-car/${carId}`)
   }
+
+
   return (
     <div className="left-card">
       {role === "Car Owner" ? (
         <>
           <h3>
-            {item.title} | {item.model}
+            {item.carBrand} | {item.model}
+            <br></br>
+            {item.year}
           </h3>
         </>
       ) : (
