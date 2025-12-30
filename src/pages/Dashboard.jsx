@@ -34,9 +34,9 @@ const Dashboard = () => {
         setGarages(myGarages)
 
         let myInterests = await getRequests()
-        let serviceReq = myInterests.map((service) => service.request)
+
         let currentReqs = [...submittedRequests]
-        let myMatchedReqs = myInterests.map((request) => {
+        myInterests.map((request) => {
           if (
             submittedRequests.some(
               (req) => req.id === submittedRequests.request._id
@@ -51,9 +51,9 @@ const Dashboard = () => {
             console.log(submittedRequests)
           })
         })
-        // console.log(myMatchedReqs)
+      
 
-        // setSubmittedRequests(myMatchedReqs)
+
       } else if (user?.role === "Car Owner") {
         let myInterests = await getMyReqs()
         let serviceReq = myInterests.map((service) => service.request)
