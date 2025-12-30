@@ -24,6 +24,7 @@ const MainDetailsCard = ({
           item={item}
           submittedRequests={submittedRequests}
           setSubmittedRequests={setSubmittedRequests}
+          onSubmitRequest={onSubmitRequest}
         />
       ))}
     </div>

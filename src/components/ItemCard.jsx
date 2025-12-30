@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 import UserContext from "../context/userContext"
 import { useNavigate } from "react-router-dom"
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, onSubmitRequest }) => {
   const { user } = useContext(UserContext)
   const navigate = useNavigate()
   const role = user.role

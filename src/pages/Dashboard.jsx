@@ -17,6 +17,11 @@ const Dashboard = () => {
 
   const [submittedRequests, setSubmittedRequests] = useState([])
   const [interestedRequests, setInterestedRequests] = useState([])
+    const handleInterest = (newInterest) => {
+    setInterestedRequests((interests) => [...interests, newInterest])
+    setRequestIds((ids) => [...ids, newInterest.id])
+  }
+
 
   useEffect(() => {
     if (!user?.role) return
@@ -39,12 +44,7 @@ const Dashboard = () => {
     }
     getmycarsAndIntrests()
 
-  }, [user])
-
-  // const handleInterest = (newInterest) => {
-  //   setInterestedRequests((interests) => [...interests, newInterest])
-  //   setRequestIds((ids) => [...ids, newInterest.id])
-  // }
+  }, [user, submittedRequests])
 
   let title = user?.name
   let leftPanel = user?.role === "Garage Owner" ? "Service Requests" : "My Cars"
@@ -58,15 +58,15 @@ const Dashboard = () => {
           <h2>{leftPanel}</h2>
           <MainDetailsCard
             items={user?.role === "Car Owner" ? cars : submittedRequests}
-            // onSubmitRequest={
-            //   user?.role === "Car Owner"
-            //     ? (newRequest) =>
-            //         setSubmittedRequests((requests) => [
-            //           ...requests,
-            //           newRequest,
-            //         ])
-            //     : handleInterest
-            // }
+            onSubmitRequest={
+              user?.role === "Car Owner"
+                ? (newRequest) =>
+                    setSubmittedRequests((requests) => [
+                      ...requests,
+                      newRequest,
+                    ])
+                : handleInterest
+            }
             requestIds={requestIds}
             submittedRequests={submittedRequests}
             setSubmittedRequests={setSubmittedRequests}
