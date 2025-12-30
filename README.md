@@ -43,9 +43,8 @@ https://github.com/Danalajmi/carma-BE
 
 ---
 
-### External APIs
-![Google Maps](https://img.shields.io/badge/Google%20Maps%20API-4285F4?logo=googlemaps&logoColor=white)
-![API%20Ninjas](https://img.shields.io/badge/API%20Ninjas-Cars-blue)
+### Deployed Link
+[Carma](http://carma-garage.surge.sh/)
 
 
 
