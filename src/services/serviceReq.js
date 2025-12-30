@@ -11,8 +11,7 @@ export const getRequests = async () => {
 }
 
 export const getMyReqs = async () => {
-  console.log("here")
   let res = await Client.get('/cars/myRequests')
-  
+
   return res.data
 }

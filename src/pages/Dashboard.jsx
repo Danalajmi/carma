@@ -4,8 +4,8 @@ import MainDetailsCard from "../components/MainDetailsCard"
 import InterestedCard from "../components/InterestedCard"
 import services from "../assets/services.json"
 import { getCars } from "../services/car"
+import { getMyGarages } from "../services/garage"
 import { getRequests, getMyReqs } from "../services/serviceReq"
-
 
 const Dashboard = () => {
   const { user } = useContext(userContext)
@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [requestIds, setRequestIds] = useState([])
 
   const [cars, setCars] = useState([])
-
+  const [garages, setGarages] = useState([])
   const [submittedRequests, setSubmittedRequests] = useState([])
   const [interestedRequests, setInterestedRequests] = useState([])
     const handleInterest = (newInterest) => {
@@ -29,17 +29,36 @@ const Dashboard = () => {
       let mycars = await getCars()
       setCars(mycars)
 
-      if(user?.role === 'Garage Owner'){
+      if (user?.role === "Garage Owner") {
+        let myGarages = await getMyGarages()
+        setGarages(myGarages)
+
         let myInterests = await getRequests()
-      let serviceReq = myInterests.map((service) => service.request)
-      setSubmittedRequests(serviceReq)
+        let serviceReq = myInterests.map((service) => service.request)
+        let currentReqs = [...submittedRequests]
+        let myMatchedReqs = myInterests.map((request) => {
+          if (
+            submittedRequests.some(
+              (req) => req.id === submittedRequests.request._id
+            )
+          ) {
+            return null
+          }
+          request.matchedGarages.map((garage) => {
+            if (garage._id === garages[0]?._id) {
+              setSubmittedRequests([...currentReqs, request.request])
+            }
+            console.log(submittedRequests)
+          })
+        })
+        // console.log(myMatchedReqs)
 
-      }else if (user?.role === 'Car Owner'){
-
+        // setSubmittedRequests(myMatchedReqs)
+      } else if (user?.role === "Car Owner") {
         let myInterests = await getMyReqs()
         let serviceReq = myInterests.map((service) => service.request)
 
-      setSubmittedRequests(serviceReq)
+        setSubmittedRequests(serviceReq)
       }
     }
     getmycarsAndIntrests()
@@ -48,7 +67,8 @@ const Dashboard = () => {
 
   let title = user?.name
   let leftPanel = user?.role === "Garage Owner" ? "Service Requests" : "My Cars"
-  let rightPanel = user?.role === "Garage Owner" ? "My Interests" : "Sent Requests"
+  let rightPanel =
+    user?.role === "Garage Owner" ? "My Interests" : "Sent Requests"
 
   return (
     <div className="dashboard">

@@ -17,3 +17,12 @@ export const getAll_garages = async () => {
   }
 }
 
+export const getMyGarages = async () => {
+  try {
+    const res = await Client.get("/garages/myGarages")
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
