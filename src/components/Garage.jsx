@@ -7,6 +7,8 @@ const Garage = ({ garage }) => {
       <header className="garage-header">
         <h2 className="garage-name">{garage.name}</h2>
         <span className="garage-location">{garage.location}</span>
+        <h5 className="garage-phone">Phone {garage.phone}</h5>
+
       </header>
 
       <p className="garage-description">{garage.description}</p>

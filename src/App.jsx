@@ -10,6 +10,7 @@ import New from "./components/New"
 import UserContext from "./context/userContext"
 import Dashboard from "./pages/Dashboard"
 import ServiceRequestForm from "./components/ServiceRequestForm"
+import EditCar from "./components/EditCar"
 
 const App = () => {
   const { user, saveUser, checkToken } = useContext(UserContext)
@@ -24,7 +25,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/SRF" element={<ServiceRequestForm car='my infiniti'/>} />
+          
+          <Route path="/edit-car/:carId" element={<EditCar />} />
         </Routes>
       </main>
     </>
