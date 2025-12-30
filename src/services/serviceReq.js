@@ -9,3 +9,10 @@ export const getRequests = async () => {
   let res = await Client.get('/cars/requests')
   return res.data
 }
+
+export const getMyReqs = async () => {
+  console.log("here")
+  let res = await Client.get('/cars/myRequests')
+  
+  return res.data
+}

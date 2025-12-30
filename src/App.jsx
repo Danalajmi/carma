@@ -25,10 +25,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route
-            path="/SRF"
-            element={<ServiceRequestForm car="my infiniti" />}
-          />
+          
           <Route path="/edit-car/:carId" element={<EditCar />} />
         </Routes>
       </main>

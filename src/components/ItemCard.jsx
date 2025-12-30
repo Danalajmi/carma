@@ -14,7 +14,7 @@ const ItemCard = ({ item }) => {
   const handleEdit = (carId) => {
     navigate(`/edit-car/${carId}`)
   }
-
+let requestIds = [1,3243534]
 
   return (
     <div className="left-card">
@@ -29,7 +29,7 @@ const ItemCard = ({ item }) => {
       ) : (
         <>
           <h3>
-            {item.car.title} | {item.car.model}
+            {item.car.carBrand} | {item.car.model}
           </h3>
         </>
       )}
@@ -63,11 +63,12 @@ const ItemCard = ({ item }) => {
           )}
         </>
       ) : (
-        <h1>hi</h1>
+        <>
+{!requestIds.includes(item?._id) && ( //if item id exists, then button won't render
+  <button onClick={() => onSubmitRequest(item)}>Show Interest</button>
+)}
+        </>
 
-        // !requestIds.includes(item?._id) && ( //if item id exists, then button won't render
-        //   <button onClick={() => onSubmitRequest(item)}>Show Interest</button>
-        // )
       )}
     </div>
   )
