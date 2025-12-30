@@ -28,13 +28,13 @@ const Dashboard = () => {
     const getmycarsAndIntrests = async () => {
       let mycars = await getCars()
       setCars(mycars)
-
       if (user?.role === "Garage Owner") {
         let myGarages = await getMyGarages()
         setGarages(myGarages)
 
         let myInterests = await getRequests()
 
+        console.log("here")
         let currentReqs = [...submittedRequests]
         myInterests.map((request) => {
           if (
@@ -43,19 +43,19 @@ const Dashboard = () => {
             )
           ) {
             return null
+
           }
           request.matchedGarages.map((garage) => {
             if (garage._id === garages[0]?._id) {
               setSubmittedRequests([...currentReqs, request.request])
             }
-            console.log(submittedRequests)
           })
+          
+
         })
-      
-
-
       } else if (user?.role === "Car Owner") {
         let myInterests = await getMyReqs()
+
         let serviceReq = myInterests.map((service) => service.request)
 
         setSubmittedRequests(serviceReq)
@@ -63,7 +63,7 @@ const Dashboard = () => {
     }
     getmycarsAndIntrests()
 
-  }, [user, submittedRequests])
+  }, 500)
 
   let title = user?.name
   let leftPanel = user?.role === "Garage Owner" ? "Service Requests" : "My Cars"
