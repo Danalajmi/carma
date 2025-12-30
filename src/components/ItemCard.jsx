@@ -29,14 +29,14 @@ let requestIds = [1,3243534]
       ) : (
         <>
           <h3>
-            {item.car.carBrand} | {item.car.model}
+            {item?.car?.carBrand} | {item?.car?.model}
           </h3>
         </>
       )}
       {role === "Garage Owner" ? (
         <>
           <p>
-            Request for: <strong>{item.car.carBrand}</strong>
+            Request for: <strong>{item.car?.carBrand}</strong>
           </p>
           <p>Description: {item.description}</p>
         </>
