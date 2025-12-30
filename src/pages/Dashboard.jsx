@@ -4,34 +4,42 @@ import MainDetailsCard from "../components/MainDetailsCard"
 import InterestedCard from "../components/InterestedCard"
 import services from "../assets/services.json"
 import { getCars } from "../services/car"
-import { getRequests } from "../services/serviceReq"
+import { getRequests, getMyReqs } from "../services/serviceReq"
 
 
 const Dashboard = () => {
   const { user } = useContext(userContext)
 
-
   // explain this whole thing to me plz
   const [requestIds, setRequestIds] = useState([])
 
-  // my sample cars
   const [cars, setCars] = useState([])
 
-  // my sample submitted requests
   const [submittedRequests, setSubmittedRequests] = useState([])
   const [interestedRequests, setInterestedRequests] = useState([])
 
   useEffect(() => {
+    if (!user?.role) return
     const getmycarsAndIntrests = async () => {
       let mycars = await getCars()
       setCars(mycars)
-      let myInterests = await getRequests()
-      
 
-      setSubmittedRequests(myInterests)
+      if(user?.role === 'Garage Owner'){
+        let myInterests = await getRequests()
+      let serviceReq = myInterests.map((service) => service.request)
+      setSubmittedRequests(serviceReq)
+
+      }else if (user?.role === 'Car Owner'){
+
+        let myInterests = await getMyReqs()
+        let serviceReq = myInterests.map((service) => service.request)
+
+      setSubmittedRequests(serviceReq)
+      }
     }
     getmycarsAndIntrests()
-  }, [submittedRequests,interestedRequests])
+
+  }, [user])
 
   // const handleInterest = (newInterest) => {
   //   setInterestedRequests((interests) => [...interests, newInterest])
@@ -40,8 +48,7 @@ const Dashboard = () => {
 
   let title = user?.name
   let leftPanel = user?.role === "Garage Owner" ? "Service Requests" : "My Cars"
-  let rightPanel =
-    user?.role === "Garage Owner" ? "My Interests" : "Sent Requests"
+  let rightPanel = user?.role === "Garage Owner" ? "My Interests" : "Sent Requests"
 
   return (
     <div className="dashboard">
@@ -61,7 +68,7 @@ const Dashboard = () => {
             //     : handleInterest
             // }
             requestIds={requestIds}
-            submittedRequests= {submittedRequests}
+            submittedRequests={submittedRequests}
             setSubmittedRequests={setSubmittedRequests}
           />
         </div>
@@ -74,7 +81,6 @@ const Dashboard = () => {
                 ? submittedRequests
                 : interestedRequests
             }
-
           />
         </div>
       </div>

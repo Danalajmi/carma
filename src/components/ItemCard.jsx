@@ -9,7 +9,7 @@ const ItemCard = ({ item }) => {
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id)
   }
-
+let requestIds = [1,343557]
   return (
       <div className="left-card">
       {role === "Car Owner" ? (
@@ -21,7 +21,7 @@ const ItemCard = ({ item }) => {
       ) : (
         <>
           <h3>
-            {item.car.title} | {item.car.model}
+            {item.car.carBrand} | {item.car.model}
           </h3>
         </>
       )}
@@ -41,15 +41,16 @@ const ItemCard = ({ item }) => {
           </button>
 
 
-          {expandedId === item.id && <ServiceRequestForm car={item.title} />}
+          {expandedId === item.id && <ServiceRequestForm car={item.title} collapseForm={() => setExpandedId(null)} />}
         </>
       ) : (
-        <h1>hi</h1>
+        <>
+{!requestIds.includes(item?._id) && ( //if item id exists, then button won't render
+  <button onClick={() => onSubmitRequest(item)}>Show Interest</button>
+)}
+        </>
 
 
-        // !requestIds.includes(item?._id) && ( //if item id exists, then button won't render
-        //   <button onClick={() => onSubmitRequest(item)}>Show Interest</button>
-        // )
       )}
     </div>
   )
