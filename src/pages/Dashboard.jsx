@@ -50,7 +50,7 @@ const Dashboard = () => {
               setSubmittedRequests([...currentReqs, request.request])
             }
           })
-          
+
 
         })
       } else if (user?.role === "Car Owner") {
@@ -63,7 +63,7 @@ const Dashboard = () => {
     }
     getmycarsAndIntrests()
 
-  }, 500)
+  }, [user, submittedRequests])
 
   let title = user?.name
   let leftPanel = user?.role === "Garage Owner" ? "Service Requests" : "My Cars"
