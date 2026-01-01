@@ -11,19 +11,7 @@ const ServiceRequestForm = ({ ServiceRequest, setServiceRequest, car, collapseFo
   const [formState, setFormState] = useState(initialState)
   const [cars, setCars] = useState([])
 
-  // useEffect(() => {
-  //   const fetchCars = async () => {
-  //     const res = await axios.get("http://localhost:3000/cars")
 
-  //     const cars = res.data.map((car) => ({
-  //       value: car._id,
-  //     }))
-
-  //     setCars(cars)
-  //   }
-
-  //   fetchCars()
-  // }, [])
 
   const handleChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value })
